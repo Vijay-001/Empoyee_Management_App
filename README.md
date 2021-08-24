@@ -12,6 +12,8 @@ API                  :  dummy services integrated for fetching, updating and ins
 
 API Source           :  https://reqres.in/
 
+Validation           :  Added formik and Yup validation.
+
 Login Credential     :   email    : eve.holt@reqres.in
                                         password : cityslicka
 
