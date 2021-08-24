@@ -85,8 +85,7 @@ const AdminLogin: React.FC<loginData> = props => {
                          values: FormValues,
                          formikHelpers: FormikHelpers<FormValues>
                      ) => {
-                         alert(JSON.stringify(values, null, 2));
-                         formikHelpers.setSubmitting(false);
+                           formikHelpers.setSubmitting(false);
                      }}
                  >
                      {(formikProps: FormikProps<FormValues>) => (
