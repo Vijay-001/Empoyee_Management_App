@@ -1,0 +1,89 @@
+
+
+// import external css syntax.
+
+@import  'bootstrap/dist/css/bootstrap.min.css';
+
+
+// Sass varrible declaration.
+
+$Button-Primary-Color: #1976d2;
+$Button-Success-Color: #4CAF50;
+$btn-padding: .2rem 1rem;
+$font-size: 12px;
+$text-transform: capitalize;
+$text-align: center;
+$font-weight: bold;
+$class-hover-color:none;
+
+
+
+
+
+.App {
+    text-align: $text-align;
+}
+
+.button {
+    background-color: $Button-Success-Color;
+    text-transform: $text-transform;
+    padding: $btn-padding;
+    font-size: $font-size;
+    text-align: $text-align;
+    font-weight: $font-weight;
+}
+
+button:hover {
+    background-color: $Button-Success-Color;
+    color: $Button-Success-Color;
+}
+
+.buttonPrimary {
+    background-color: $Button-Primary-Color;
+    text-transform: $text-transform;
+    padding: $btn-padding;
+    font-size: $font-size;
+    text-align: $text-align;
+    font-weight: $font-weight;
+}
+
+buttonPrimary:hover {
+    background-color: $Button-Primary-Color;
+    color: $Button-Primary-Color;
+}
+
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+    background-color: $Button-Primary-Color;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
