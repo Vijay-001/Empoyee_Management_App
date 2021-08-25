@@ -2,26 +2,15 @@ import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
-
-
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import { IUser, Signupdata } from '../Reducer/userReducer';
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../Reducer/reducerHooks';
 import { Redirect } from 'react-router-dom';
-import { Formik, FormikHelpers, FormikProps, Form, Field } from "formik";
-import { FormTextField } from "./FormTextField";
-import * as yup from "yup";
-
-
-
-
-
-  interface IProps {
-     
-         userInfo : IUser
-     }
+import {  FormikProps, withFormik } from "formik";
+import * as Yup from "yup";
+import { TextField } from '@material-ui/core';
 
 
 
@@ -30,18 +19,33 @@ interface FormValues {
     password: string;
 }
 
+interface OtherProps {
+    title?: string;
+    userInfo: IUser
+}
 
-// the Formik component supports yup validation out-of-the-box via the `validationSchema` prop
-const validationSchema = yup.object().shape({
-    email: yup.string().required("Required"),
-    password: yup.string().required("Required")
-});
+interface MyFormProps {
+    initialEmail?: string;
+    initialPassword?: string;
+    userInfo: IUser
+}
 
 
-const SignUp: React.FC <IProps> = props => {
+
+const SignUpForm = (props: OtherProps & FormikProps<FormValues>) => {
+
+    const {
+        values,
+        errors,
+        touched,
+        handleChange,
+        handleBlur,
+        isSubmitting,
+        handleSubmit,
+        userInfo
+    } = props;
 
 
-    const { userInfo } = props;
 
     const [userInfoState, setuserInfoState] = useState(userInfo);
 
@@ -49,79 +53,68 @@ const SignUp: React.FC <IProps> = props => {
 
 
     const getOnchangeValues = (fieldName: string, value: string) => {
-         setuserInfoState({
+        setuserInfoState({
             ...userInfoState,
             [fieldName]: value
         })
     }
 
-    const RegisteredEmployee = () => {
-        if (typeof userInfoState !== 'undefined' && userInfoState !== null) {
-            dispatch(Signupdata(userInfoState));
-        } else {
-            alert("Invalid sign-up details")
-        }        
-      }
-
+    const RegisteredEmployee = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        dispatch(Signupdata(userInfoState));
+        handleSubmit();
+       
+    }
 
     // getting data from  reducer custom hooks    
     const { data } = useAppSelector((state) => state.users.users);
     if (data[0]) {
         return <Redirect to='/adminlogin' />
-    } 
-   
+    }
 
-        return (
+    return (
+        <form onSubmit={RegisteredEmployee}>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <p></p>
                 <p></p>
                 <p></p>
                 <p></p>
-                <p></p>
-                <Formik
-                    initialValues={{
-                        email: "",
-                        password: ""
-                    }}
-                    validationSchema={validationSchema}
-                    onSubmit={(
-                        values: FormValues,
-                        formikHelpers: FormikHelpers<FormValues>
-                    ) => {
-                        formikHelpers.setSubmitting(false);
-                    }}
-                >
-                    {(formikProps: FormikProps<FormValues>) => (
-                        <Form noValidate autoComplete="off">
-
-                                                    
                 <Grid container spacing={2}>
-                     <Grid item xs={12}>
-                    <Field
-                        name="email"
-                        label="Email"
-                        size="small"
-                        value={userInfoState?.email}
-                        component={FormTextField}
-                        onKeyUp={(event: any) => { getOnchangeValues('email', event.target.value) }}
-                    />
-                     
-                     
-                    </Grid>
                     <Grid item xs={12}>
-                        <Field
+                        <TextField
+                            variant="outlined"
+                            name="email"
+                            label="Email Address"
+                            size="small"
+                            margin="normal"
+                            onKeyUp={(event: any) => { getOnchangeValues('email', event.target.value) }}
+                            onBlur={handleBlur}
+                            value={values?.email}
+                            error={Boolean(touched.email && errors.email)}
+                            helperText={touched.email && errors.email}
+                            onChange={handleChange}
+                            fullWidth
+                        />
+                    </Grid>
+
+                    <Grid item xs={12}>
+                        <TextField
+                            variant="outlined"
                             name="password"
                             label="Password"
+                            margin="normal"
                             size="small"
-                            value={userInfoState?.password}
-                            component={FormTextField}
                             onKeyUp={(event: any) => { getOnchangeValues('password', event.target.value) }}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values?.password}
+                            error={Boolean(touched.password && errors.password)}
+                            helperText={touched.password && errors.password}
+                            fullWidth
                         />
-                       
                     </Grid>
                 </Grid>
-                <p></p>
                 <p></p>
                 <p></p>
                 <p></p>
@@ -131,28 +124,59 @@ const SignUp: React.FC <IProps> = props => {
                     fullWidth
                     variant="contained"
                     color="primary"
-                    onClick={RegisteredEmployee}
+                    disabled={
+                        isSubmitting ||
+                        !!(errors.email && touched.email) ||
+                        !!(errors.password && touched.password)
+                    }
                 >
                     Sign Up
-                        </Button>
+               </Button>
                 <p></p>
                 <p></p>
-                <p></p>
-                <p></p>
-                <Grid container justifyContent="flex-end">
+                <Grid container>
+                    <Grid item xs>
+                        <Link href="#" variant="body2">
+                            Forgot password?
+              </Link>
+                    </Grid>
+                    <p></p>
+                    <p></p>
                     <Grid item>
                         <Link href="/adminlogin" variant="body2">
-                            Already have an account? Sign in
-                                 </Link>
+                            {"Already have an account? Sign in"}
+                        </Link>
                     </Grid>
                 </Grid>
-                     </Form>
-                    )}
-                </Formik>
             </Container>
-        )
+        </form>
+
+    )
+}
+
+
+const SignUp = withFormik<MyFormProps, FormValues>({
+   
+    mapPropsToValues: props => ({
+        email: props.initialEmail || "",
+        password: props.initialPassword || ""
+    }),
+
+    validationSchema: Yup.object().shape({
+        email: Yup.string().email("Email not valid").required("Email is required"),
+        password: Yup.string().required("Password is required")
+    }),
+
+    
+
+    handleSubmit(
+        { email, password }: FormValues,
+        { props, setSubmitting, setErrors }
+    ) {
+        setSubmitting(false);
+        console.log(email, password);
     }
 
-
+})(SignUpForm);
 
 export default SignUp;
