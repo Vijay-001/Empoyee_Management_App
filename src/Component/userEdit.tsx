@@ -1,21 +1,16 @@
 import { useEffect, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { AddNewUser, IUser, updateUser } from "../Reducer/userReducer";
+import { AddNewUser, updateUser } from "../Reducer/userReducer";
 import { Mode } from "./ViewEmployeeDetails";
 
 import '../App.scss';
 
+import { IProps } from "../Interfaces/Interfaces";
 
 
-interface IProps {
-    show: boolean,
-    onClose: () => void;
-    onSave?: () => void;
-    userInfo: IUser,
-    mode : string
 
-}
+
 
 export const UserEditModal: React.FC<IProps> = (props) => {
 

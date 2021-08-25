@@ -4,7 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import { IUser, LoginUser } from '../Reducer/userReducer';
+import { LoginUser } from '../Reducer/userReducer';
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../Reducer/reducerHooks';
 import { Redirect } from 'react-router-dom';
@@ -12,25 +12,7 @@ import { FormikProps, withFormik } from "formik";
 import * as Yup from "yup";
 import { TextField } from '@material-ui/core';
 
-
-
-
-interface FormValues {
-    email: string;
-    password: string;
-}
-
-interface OtherProps {
-    title?: string;
-    userInfo: IUser
-}
-
-interface MyFormProps {
-    initialEmail?: string;
-    initialPassword?: string;
-    userInfo: IUser
-}
-
+import { FormValues, MyFormProps, OtherProps } from '../Interfaces/Interfaces';
 
 
 
