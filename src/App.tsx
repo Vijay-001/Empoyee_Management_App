@@ -1,9 +1,9 @@
 import { QueryClient, QueryClientProvider } from 'react-query';
-import Navigation from './Navigation/Navigation';
+import Navigation from './navigation/navigation';
 import { Provider } from 'react-redux';
-import Appbar from './Component/Appbar';
+import Header from './component/Headers/Headers';
 import { HashRouter } from 'react-router-dom';
-import { store } from './Store/store';
+import { store } from './store/index';
 import { StylesProvider } from "@material-ui/core/styles";
 
 const queryClient = new QueryClient();
@@ -16,7 +16,7 @@ const App: React.FC<{}> = props => {
                 <QueryClientProvider client={queryClient}>
                   <StylesProvider injectFirst>
                    <div>
-                    <Appbar />
+                    <Header />
                     <Navigation />
                   </div>
                   </StylesProvider>

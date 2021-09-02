@@ -4,20 +4,19 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import { Signupdata } from '../Reducer/userReducer';
 import { useDispatch } from 'react-redux';
-import { useAppSelector } from '../Reducer/reducerHooks';
 import { Redirect } from 'react-router-dom';
-import {  FormikProps, withFormik } from "formik";
+import { FormikProps, withFormik } from "formik";
 import * as Yup from "yup";
 import { TextField } from '@material-ui/core';
+import { FormValues, MyFormProps, OtherProps } from '../../common/Interface/Interface';
+import { LoginUser } from '../../store/actions/actions';
+import { useAppSelector } from '../../store/reducers/reducerHooks';
 
-import { FormValues, MyFormProps, OtherProps } from '../Interfaces/Interfaces';
 
 
 
-
-const SignUpForm = (props: OtherProps & FormikProps<FormValues>) => {
+const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
 
     const {
         values,
@@ -25,40 +24,42 @@ const SignUpForm = (props: OtherProps & FormikProps<FormValues>) => {
         touched,
         handleChange,
         handleBlur,
-        isSubmitting,
         handleSubmit,
+        isSubmitting,
         userInfo
     } = props;
 
 
-
-    const [userInfoState, setuserInfoState] = useState(userInfo);
+    const [userInfoState, setUserInfoState] = useState(userInfo);
 
     const dispatch = useDispatch();
 
 
-    const getOnchangeValues = (fieldName: string, value: string) => {
-        setuserInfoState({
+    const onChangesValues = (fieldName: string, value: string) => {
+        setUserInfoState({
             ...userInfoState,
             [fieldName]: value
         })
     }
 
-    const RegisteredEmployee = (e: React.FormEvent<HTMLFormElement>) => {
+    const CheckLogindetails = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch(Signupdata(userInfoState));
         handleSubmit();
-       
-    }
+        dispatch(LoginUser(userInfoState));  
+            
+     }
 
-    // getting data from  reducer custom hooks    
+    // getting data from  reducer custom hooks
+
     const { data } = useAppSelector((state) => state.users.users);
-    if (data[0]) {
-        return <Redirect to='/adminlogin' />
-    }
+    if (data[0] && typeof userInfoState !== 'undefined' && userInfoState !== null) {
+        return <Redirect to='/ViewEmployeeDetails' />
+    } 
+
+
 
     return (
-        <form onSubmit={RegisteredEmployee}>
+        <form onSubmit={CheckLogindetails}>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <p></p>
@@ -73,10 +74,10 @@ const SignUpForm = (props: OtherProps & FormikProps<FormValues>) => {
                             label="Email Address"
                             size="small"
                             margin="normal"
-                            onKeyUp={(event: any) => { getOnchangeValues('email', event.target.value) }}
+                            onKeyUp={(event: any) => { onChangesValues('email', event.target.value) }}
                             onBlur={handleBlur}
                             value={values?.email}
-                            error={Boolean(touched.email && errors.email)}
+                            error={Boolean(touched.email && errors.email)}                            
                             helperText={touched.email && errors.email}
                             onChange={handleChange}
                             fullWidth
@@ -90,11 +91,12 @@ const SignUpForm = (props: OtherProps & FormikProps<FormValues>) => {
                             label="Password"
                             margin="normal"
                             size="small"
-                            onKeyUp={(event: any) => { getOnchangeValues('password', event.target.value) }}
+                            type="password"
+                            onKeyUp={(event: any) => { onChangesValues('password', event.target.value) }}
                             onChange={handleChange}
                             onBlur={handleBlur}
                             value={values?.password}
-                            error={Boolean(touched.password && errors.password)}
+                            error={Boolean(touched.password && errors.password)}                            
                             helperText={touched.password && errors.password}
                             fullWidth
                         />
@@ -115,7 +117,7 @@ const SignUpForm = (props: OtherProps & FormikProps<FormValues>) => {
                         !!(errors.password && touched.password)
                     }
                 >
-                    Sign Up
+                    Sign In
                </Button>
                 <p></p>
                 <p></p>
@@ -128,20 +130,21 @@ const SignUpForm = (props: OtherProps & FormikProps<FormValues>) => {
                     <p></p>
                     <p></p>
                     <Grid item>
-                        <Link href="/adminlogin" variant="body2">
-                            {"Already have an account? Sign in"}
+                        <Link href="/signup" variant="body2">
+                            {"Don't have an account? Sign Up"}
                         </Link>
                     </Grid>
                 </Grid>
             </Container>
-        </form>
+        </form>       
+        
+      )
+ }
 
-    )
-}
 
 
-const SignUp = withFormik<MyFormProps, FormValues>({
-   
+const AdminLogin = withFormik<MyFormProps, FormValues>({
+
     mapPropsToValues: props => ({
         email: props.initialEmail || "",
         password: props.initialPassword || ""
@@ -152,7 +155,7 @@ const SignUp = withFormik<MyFormProps, FormValues>({
         password: Yup.string().required("Password is required")
     }),
 
-     handleSubmit(
+    handleSubmit(
         { email, password }: FormValues,
         { props, setSubmitting, setErrors }
     ) {
@@ -160,6 +163,7 @@ const SignUp = withFormik<MyFormProps, FormValues>({
         console.log(email, password);
     }
 
-})(SignUpForm);
+})(AdminLoginForm);
 
-export default SignUp;
+export default AdminLogin;
+

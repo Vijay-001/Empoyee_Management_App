@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { AddNewUser, updateUser } from "../Reducer/userReducer";
-import { Mode } from "./ViewEmployeeDetails";
-
-import '../App.scss';
-
-import { IProps } from "../Interfaces/Interfaces";
+import { IProps, Mode } from "../../common/Interface/Interface";
+import { AddNewUser, updateUser } from "../../store/actions/actions";
+import '../../App.scss'
 
 
 
@@ -51,7 +48,6 @@ export const UserEditModal: React.FC<IProps> = (props) => {
         })
     }
 
-
     return (
 
         <Modal show={show} onHide={onClose}>
@@ -90,4 +86,3 @@ export const UserEditModal: React.FC<IProps> = (props) => {
     )
   
 }
-

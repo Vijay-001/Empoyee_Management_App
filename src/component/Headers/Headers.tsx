@@ -3,43 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import { Myprops } from '../../common/Interface/Interface';
 
-
-
-
-interface Myprops {
-    appbarMessage?: string,
-    LoginText?:string
-
-}
-
-
-const ButtonAppBar: React.FC<Myprops> = (props: Myprops) => {
-
-    const appbarMessage = (props.appbarMessage) ? props.appbarMessage : " Employee Management App";
-    const LoginText = (props.LoginText) ? props.LoginText : "Login";
-
-    const classes = useStyles();
-    return (
-        <div className={classes.root}>
-            <AppBar position="static">
-                <Toolbar>
-                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h6" className={classes.title}>
-                        {appbarMessage}
-          </Typography>                 
-                                       
-                    <Button color="inherit" href="/adminlogin">{ LoginText }</Button>
-                </Toolbar>
-            </AppBar>
-        </div>
-    );
-}
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -54,4 +21,25 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default ButtonAppBar
+const Header: React.FC<Myprops> = (props: Myprops) => {
+
+    const appbarMessage = (props.appbarMessage) ? props.appbarMessage : " Employee Management App";
+    
+    const classes = useStyles();
+    return (
+        <div className={classes.root}>
+            <AppBar position="static">
+                <Toolbar>
+                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                        <MenuIcon />
+                    </IconButton>
+                    <Typography variant="h6" className={classes.title}>
+                        {appbarMessage}
+          </Typography>                 
+                 
+                </Toolbar>
+            </AppBar>
+        </div>
+    );
+}
+export default Header

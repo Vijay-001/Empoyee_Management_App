@@ -1,21 +1,16 @@
 
 import { shallow } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
-import AdminLogin from '../Component/AdminLogin';
+import AdminLogin from '../containers/AdminLogin/AdminLogin';
 import { Provider } from "react-redux";
 import configureMockStore from "redux-mock-store";
-
-
 const mockStore = configureMockStore();
 const store = mockStore({});
 
 
+describe('<AdminLogin/>', () => {
 
-
-describe('<Admin/>', () => {
-
-    let wrapper: any;
-     
+    let wrapper: any;     
    
     const props = {
         first_name: "",

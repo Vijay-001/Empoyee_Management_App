@@ -1,7 +1,6 @@
 
 import { configureStore } from '@reduxjs/toolkit'
-import rootReducer from '../Reducer/rootReducer';
-
+import rootReducer from './reducers';
 
 
 const middleware: any = [];

@@ -1,6 +1,3 @@
-
-import "../App.scss";
-
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -11,21 +8,21 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
-
-
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { Container } from "@material-ui/core";
-import { fetchUsers } from "../Reducer/userReducer";
-import { useAppSelector } from "../Reducer/reducerHooks";
-import { UserEditModal } from "./userEdit";
+import { Mode } from "../../common/Interface/Interface";
+import { useAppSelector } from "../../store/reducers/reducerHooks";
+import { UserEditModal } from "../Edit_Employee/Edit_Employee"
+import '../../App.scss'
+import { fetchUsers } from '../../store/actions/actions';
 
 
-export const Mode = {
-    NEW: 'Add Employee',
-    EDIT:'Edit Employee'
-}
-
+const useStyles = makeStyles({
+    table: {
+        minWidth: 650,
+    }
+});
 
 
 const ViewEmployeeDetails: React.FC<{}> = props => {
@@ -120,11 +117,5 @@ const ViewEmployeeDetails: React.FC<{}> = props => {
     );
 }
 
-
-const useStyles = makeStyles({
-    table: {
-        minWidth: 650,
-    }
-});
 
 export default ViewEmployeeDetails;

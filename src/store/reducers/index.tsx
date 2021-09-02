@@ -1,10 +1,5 @@
-
-
-
 import { combineReducers } from '@reduxjs/toolkit';
-import usersReducer from './userReducer';
-
-
+import usersReducer from './reducer';
 
 
 const rootReducer = combineReducers({
@@ -12,6 +7,4 @@ const rootReducer = combineReducers({
     users: usersReducer
 });
 
-
 export default rootReducer;
-

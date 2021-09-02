@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\src"
+    "\\src",
+    "\\src\\api\\model"
   ],
-  "SelectedNode": "\\src",
+  "SelectedNode": "\\src\\interfaces",
   "PreviewInSolutionExplorer": false
 }

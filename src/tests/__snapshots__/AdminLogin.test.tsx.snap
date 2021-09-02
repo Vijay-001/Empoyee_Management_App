@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<AdminLogin /> should match the snapshot 1`] = `
+exports[`<AdminLogin/> should match the snapshot 1`] = `
 <ContextProvider
   value={
     Object {
@@ -32,7 +32,7 @@ exports[`<AdminLogin /> should match the snapshot 1`] = `
     }
   }
 >
-  <AdminLogin
+  <WithFormik(AdminLoginForm)
     userInfo={
       Object {
         "avatar": "",

@@ -1,49 +1,12 @@
-
-import { createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit';
-import { IApiObject } from '../models/apiUtils';
-import { addUserDetails, getApiObject, getUserList, SignupProcess, updateUserDetails, validateLogin } from '../Services/apiUtils';
-import { IStateReduced } from '../Store/store';
-
-
-
-
-export interface IUser {
-    first_name: string;
-    id: string;
-    last_name: string;
-    email: string;
-    avatar: string;
-    password?:string
-}
+import { Dispatch } from "@reduxjs/toolkit";
+import { IUser } from '../../common/Interface/Interface';
+import { setUserList } from '../reducers/reducer';
+import { addUserDetails, adminLogin, getUserList, SignupProcess, updateUserDetails } from '../../common/APIUtils/ApiUitls';
+import { getApiObject } from "../../common/common_function/commonfunction";
+import { IStateReduced } from "../index";
 
 
-export interface IUserListState {
-    users: IApiObject<IUser[]>;
 
-}
-
-export const defaultState: IUserListState = {
-    users: getApiObject([])
-}
-
-export const usersReducer = createSlice({
-
-    name: 'userList',
-    initialState: defaultState,
-    reducers: {
-        setUserList: (state, action: PayloadAction<IApiObject<IUser[]>>) => {
-            state.users = action.payload
-        },
-    },
-});
-
-
-// set action data in set UserList
-
-export const { setUserList } = usersReducer.actions;
-
-
-// Login process
 
 export const LoginUser = (userDetails: IUser) => async (dispatch: Dispatch<any>,
     getState: () => IStateReduced): Promise<void> => {
@@ -51,10 +14,10 @@ export const LoginUser = (userDetails: IUser) => async (dispatch: Dispatch<any>,
     try {
         const existingdata = getState()?.users?.users?.data;
         dispatch(setUserList(getApiObject([], false, true)));
-        const userResponse = await validateLogin(userDetails);
+        const userResponse = await adminLogin(userDetails);
         const newselection = [...existingdata, userResponse.data]
         dispatch(setUserList(getApiObject(newselection)))
-        
+
     } catch (error) {
         dispatch(setUserList(getApiObject([], false, false, true, error?.message, error)))
     }
@@ -93,9 +56,9 @@ export const fetchUsers = async (dispatch: Dispatch<any>): Promise<void> => {
         const userResponse = await getUserList();
         dispatch(setUserList(getApiObject(userResponse.data.data)))
     } catch (error) {
-        dispatch(setUserList(getApiObject([], false,false, true, error?.message, error)))
+        dispatch(setUserList(getApiObject([], false, false, true, error?.message, error)))
     }
-     
+
 }
 
 // Update user data  process.
@@ -107,16 +70,16 @@ export const updateUser = (userDetails: IUser) => async (dispatch: Dispatch<any>
         const existingdata = getState()?.users?.users?.data;
         dispatch(setUserList(getApiObject([], false, true)));
         const userResponse = await updateUserDetails(userDetails);
-         const newselection = existingdata.map(e=> {
-    
+        const newselection = existingdata.map(e => {
+
             if (e.id === userDetails.id) {
-               return userResponse.data;
+                return userResponse.data;
             } else {
-               return e;
+                return e;
             }
-        })     
+        })
         dispatch(setUserList(getApiObject(newselection)))
-      } catch (error) {
+    } catch (error) {
         dispatch(setUserList(getApiObject([], false, false, true, error?.message, error)))
     }
 
@@ -139,6 +102,3 @@ export const AddNewUser = (userDetails: IUser) => async (dispatch: Dispatch<any>
     }
 
 }
-
-
-export default usersReducer.reducer;
