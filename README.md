@@ -3,7 +3,7 @@ POC Name             :   Employee Management App.
 
 POC GitHub URL       :   https://github.com/Vijay-001/Empoyee_Management_App.git
 
-POC Description      :   In this poc, Admin need to self-registration then admin can access
+POC Description      :   In this poc, Admin need to login then admin can access
                          the employee details and insert, edit the details.  
 
 Used Technologies    :  react-redux-typescript, sass and jest.
@@ -21,3 +21,5 @@ sign-up Credential   :   email    : eve.holt@reqres.in,
                                     password : pistol
 
 Run Project            : npm start  
+
+Run Tests cases        :  npm test a 
