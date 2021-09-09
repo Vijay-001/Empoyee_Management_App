@@ -40,10 +40,10 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
   const CheckLogindetails = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     handleSubmit();
-    await dispatch(adminLogin(userInfoState));
     if (typeof userInfoState !== 'undefined'
           && ('email' in userInfoState)
-          && ('password' in userInfoState)) {
+        && ('password' in userInfoState)) {
+      await dispatch(adminLogin(userInfoState));
       console.log('data', data);
       history.push('/ViewEmployee');
     }
@@ -79,7 +79,7 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
             <TextField
               variant="outlined"
               name="password"
-              label="Password"
+              placeholder="password"
               margin="normal"
               size="small"
               type="password"
