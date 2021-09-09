@@ -2,8 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\api\\model"
+    "\\src\\common",
+    "\\src\\containers",
+    "\\src\\containers\\AdminLogin",
+    "\\src\\containers\\Edit_Employee",
+    "\\src\\containers\\View_Employee"
   ],
-  "SelectedNode": "\\src\\interfaces",
+  "SelectedNode": "\\src\\common\\function",
   "PreviewInSolutionExplorer": false
 }

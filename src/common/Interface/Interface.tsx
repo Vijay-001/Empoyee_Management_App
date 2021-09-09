@@ -1,11 +1,9 @@
-
 /*  Interfaces */
 
-
 export interface IUser {
-    first_name: string;
+    firstName: string;
     id: string;
-    last_name: string;
+    lastName: string;
     email: string;
     avatar: string;
     password?: string
@@ -33,33 +31,32 @@ export interface IProps {
     onSave?: () => void;
     userInfo: IUser,
     mode: string
-
 }
 
 export interface IUserListState {
-    users: IApiObject<IUser[]>;}
-
-
+    users: IApiObject<IUser[]>;
+}
 
 export interface IApiObject<T> {
     data: T,
     isFetching: false,
     isUpdating: boolean,
     isError: false,
-    errorMessage: "",
+    errorMessage: '',
     error: Error
 }
 
 export const Mode = {
-    NEW: 'Add Employee',
-    EDIT: 'Edit Employee'
-}
-
-
+  NEW: 'Add Employee',
+  EDIT: 'Edit Employee',
+};
 
 export interface Myprops {
     appbarMessage?: string,
     LoginText?: string
-
 }
 
+export interface Action {
+    type: string,
+    payload?: any
+}

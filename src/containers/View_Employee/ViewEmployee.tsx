@@ -2,120 +2,115 @@ import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { Container } from "@material-ui/core";
-import { Mode } from "../../common/Interface/Interface";
-import { useAppSelector } from "../../store/reducers/reducerHooks";
-import { UserEditModal } from "../Edit_Employee/Edit_Employee"
-import '../../App.scss'
-import { fetchUsers } from '../../store/actions/actions';
-
+import { Container } from '@material-ui/core';
+import { Mode } from '../../common/Interface/Interface';
+import UserEditModal from '../Edit_Employee/Edit_Employee';
+import '../../App.scss';
+import { getUserList } from '../../common/Api/Api';
+import { useAppSelector } from '../../store/reducers/reducerHooks';
 
 const useStyles = makeStyles({
-    table: {
-        minWidth: 650,
-    }
+  table: {
+    minWidth: 650,
+  },
 });
 
+export default function ViewEmployeeDetails() {
+  const dispatch = useDispatch();
 
-const ViewEmployeeDetails: React.FC<{}> = props => {
+  const data = useAppSelector((state) => state.users.users);
 
-    const dispatch = useDispatch();
+  const [mode, setMode] = useState(Mode.EDIT);
 
-    const { data } = useAppSelector((state) => state.users.users);
+  const [showModal, setShowModal] = useState(false);
 
-    const [mode, setMode] = useState(Mode.EDIT);
+  const [userData, setUserData] = useState(null);
 
-    const [showModal, setShowModal] = useState(false);
+  const onClose = () => { setShowModal(false); };
 
-    const [userData, setUserData] = useState(null);
+  useEffect(() => {
+    dispatch(getUserList);
+  }, []);
 
-    const onClose = () => { setShowModal(false) }
+  const Updatemodel = (updata:any) => {
+    setMode(Mode.EDIT);
+    setUserData(updata);
+    setShowModal(true);
+  };
 
-    const Updatemodel = (data:any) => {
-        setMode(Mode.EDIT);
-        setUserData(data);
-        setShowModal(true);
-    }
+  const onNewModel = (newdata:any) => {
+    setMode(Mode.NEW);
+    setUserData(null);
+    setShowModal(true);
+  };
 
-    const onNewModel = (data:any) => {
-        setMode(Mode.NEW);
-        setUserData(null);
-        setShowModal(true);
-    }
+  const classes = useStyles();
 
-    useEffect(() => {
-        dispatch(fetchUsers);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+  return (
+    <Container>
+      <p />
+      <p />
+      <p />
+      <p />
+      <p />
+      <Box>
+        <Button
+          type="button"
+          variant="contained"
+          className="buttonPrimary"
+          onClick={() => onNewModel(data)}
+        >
+          Add Employee
+        </Button>
+      </Box>
+      <p />
+      <p />
+      <p />
+      <p />
+      <p />
 
-    const classes = useStyles();
-
-    return (
-        <Container>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-
-            <Box>
+      <Table className={classes.table} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell> ID</TableCell>
+            <TableCell> firstName</TableCell>
+            <TableCell> LastName</TableCell>
+            <TableCell> Email</TableCell>
+            <TableCell> Action</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {data.map((row:any) => (
+            <TableRow key={row.id}>
+              <TableCell component="th" scope="row">
+                {row.id}
+              </TableCell>
+              <TableCell>{row.first_name}</TableCell>
+              <TableCell>{row.last_name}</TableCell>
+              <TableCell>{row.email}</TableCell>
+              <TableCell>
+                {' '}
                 <Button
-                    type="button"
-                    variant="contained"
-                    className="buttonPrimary"
-                    onClick={() => onNewModel(data)}
-                >Add Employee</Button>
-            </Box>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-        
-        <TableContainer component={Paper}>         
-              
-                <Table className={classes.table} aria-label="simple table">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell> ID</TableCell>
-                            <TableCell> firstName</TableCell>
-                            <TableCell> LastName</TableCell>
-                            <TableCell> Email</TableCell>
-                            <TableCell  > Action</TableCell>                          
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {data.map((row) => (
-                            <TableRow key={row.id}>
-                                <TableCell component="th" scope="row">
-                                    {row.id}
-                                </TableCell>
-                                <TableCell >{row.first_name}</TableCell>
-                                <TableCell >{row.last_name}</TableCell>
-                                <TableCell >{row.email}</TableCell>
-                                <TableCell> <Button
-                                type="button"
-                                 variant="contained"
-                                 className ="button"
-                                onClick={() => Updatemodel(row)}>Update</Button></TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>    
-            </TableContainer>     
-            <UserEditModal show={showModal} onClose={onClose} mode={mode} userInfo={userData as any} />
-        </Container>
-           
-    );
+                  type="button"
+                  variant="contained"
+                  className="button"
+                  onClick={() => Updatemodel(row)}
+                >
+                  Update
+                </Button>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+      <UserEditModal show={showModal} onClose={onClose} mode={mode} userInfo={userData as any} />
+    </Container>
+
+  );
 }
-
-
-export default ViewEmployeeDetails;
