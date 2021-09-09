@@ -28,6 +28,15 @@ module.exports = {
         "import/prefer-default-export": "off",
         "react/react-in-jsx-scope": "off",
         "no-param-reassign": 0,
+        "camelcase": "off",
+        "@typescript-eslint/naming-convention": [
+            "off",
+            {
+                "selector": "default",
+                "format": null
+            }
+        ],
+    
         "import/extensions": [
             "error",
             "ignorePackages",

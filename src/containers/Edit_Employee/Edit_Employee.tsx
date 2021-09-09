@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Button, Form, Modal } from 'react-bootstrap';
+import { TextField } from '@material-ui/core';
 import { IProps, Mode } from '../../common/Interface/Interface';
 import '../../App.scss';
 import { addUserDetails, updateUserDetails } from '../../common/Api/Api';
@@ -15,7 +16,8 @@ const UserEditModal: React.FC<IProps> = (props) => {
   const [userInfoState, setUserInfoState] = useState(userInfo);
   const dispatch = useDispatch();
 
-  const onSaveModal = () => {
+  const onSaveModal = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (mode === Mode.EDIT) {
       dispatch(updateUserDetails(userInfoState));
     } else {
@@ -51,43 +53,58 @@ const UserEditModal: React.FC<IProps> = (props) => {
           Modal
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
-        <Form>
-          <Form.Group className="mb-3" controlId="firstName">
-            <Form.Label>FirstName</Form.Label>
-            <Form.Control
-              value={userInfoState?.firstName}
-              type="text"
-              onChange={(event) => { onChangevalue('first_name', event.target.value); }}
-            />
-          </Form.Group>
+      <form onSubmit={onSaveModal}>
+        <Modal.Body>
+          <TextField
+            required
+            variant="outlined"
+            name="firstName"
+            label="firstName"
+            size="small"
+            margin="normal"
+            onChange={(event: any) => { onChangevalue('first_name', event.target.value); }}
+            value={userInfoState?.first_name}
+            fullWidth
+          />
 
-          <Form.Group className="mb-3" controlId="lastName">
-            <Form.Label>LastName</Form.Label>
-            <Form.Control
-              type="text"
-              value={userInfoState?.lastName}
-              onChange={(event) => { onChangevalue('last_name', event.target.value); }}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="email">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              type="text"
-              value={userInfoState?.email}
-              onChange={(event) => { onChangevalue('email', event.target.value); }}
-            />
-          </Form.Group>
-        </Form>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={onClose}>
-          Close
-        </Button>
-        <Button variant="primary" onClick={onSaveModal}>
-          Save Changes
-        </Button>
-      </Modal.Footer>
+          <TextField
+            required
+            variant="outlined"
+            name="last_name"
+            label="last_name"
+            size="small"
+            margin="normal"
+            onChange={(event: any) => { onChangevalue('last_name', event.target.value); }}
+            value={userInfoState?.last_name}
+            fullWidth
+          />
+
+          <TextField
+            required
+            variant="outlined"
+            name="email"
+            label="email"
+            size="small"
+            margin="normal"
+            onChange={(event: any) => { onChangevalue('email', event.target.value); }}
+            value={userInfoState?.email}
+            fullWidth
+          />
+
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={onClose}>
+            Close
+          </Button>
+          <Button
+            variant="primary"
+            type="submit"
+          >
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </form>
+
     </Modal>
   );
 };

@@ -1,9 +1,9 @@
 /*  Interfaces */
 
 export interface IUser {
-    firstName: string;
+    first_name: string;
     id: string;
-    lastName: string;
+    last_name: string;
     email: string;
     avatar: string;
     password?: string
