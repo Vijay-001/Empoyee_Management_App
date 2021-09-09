@@ -22,4 +22,4 @@ sign-up Credential   :   email    : eve.holt@reqres.in,
 
 Run Project            : npm start  
 
-Run Tests cases        :  npm test a 
+Run Tests cases        :  npm test  
