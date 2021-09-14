@@ -13,11 +13,11 @@ export const adminLogin = (values: IUser) => async (dispatch: Dispatch<any>,
       } else {
         const existingdata = getState()?.users?.users;
         const newselection = [...existingdata, res.data];
-        console.log('newselection', newselection);
         dispatch(ActionCreators.loginSuccess(newselection));
       }
     }).catch((error) => {
       dispatch(ActionCreators.loginFailed());
+      return error;
     });
 };
 
@@ -35,6 +35,7 @@ export const addUserDetails = (values: IUser) => async (dispatch: Dispatch<any>,
     })
     .catch((error) => {
       dispatch(ActionCreators.AddEmployeeFailed());
+      return error;
     });
 };
 
@@ -70,5 +71,6 @@ export const updateUserDetails = (values: IUser) => async (dispatch: Dispatch<an
       }
     }).catch((error) => {
       dispatch(ActionCreators.UpdateEmployeeFailed());
+      return error;
     });
 };

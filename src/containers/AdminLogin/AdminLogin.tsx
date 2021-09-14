@@ -44,7 +44,6 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
           && ('email' in userInfoState)
         && ('password' in userInfoState)) {
       await dispatch(adminLogin(userInfoState));
-      console.log('data', data);
       history.push('/ViewEmployee');
     }
   };

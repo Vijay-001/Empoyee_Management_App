@@ -14,12 +14,8 @@ export const FormValidation = withFormik<MyFormProps, FormValues>({
     password: Yup.string().required('Password is required'),
   }),
 
-  handleSubmit(
-    { email, password }: FormValues,
-    { props, setSubmitting, setErrors },
-  ) {
+  handleSubmit(setSubmitting:any) {
     setSubmitting(false);
-    console.log(email, password);
   },
 
 });
