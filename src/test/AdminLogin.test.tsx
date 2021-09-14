@@ -11,9 +11,9 @@ describe('<AdminLogin/>', () => {
   let wrapper: any;
 
   const props = {
-    firstName: '',
+    first_name: '',
     id: '',
-    lastName: '',
+    last_name: '',
     email: '',
     avatar: '',
     password: '',

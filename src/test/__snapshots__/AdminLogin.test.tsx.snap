@@ -37,9 +37,9 @@ exports[`<AdminLogin/> should match the snapshot 1`] = `
       Object {
         "avatar": "",
         "email": "",
-        "firstName": "",
+        "first_name": "",
         "id": "",
-        "lastName": "",
+        "last_name": "",
         "password": "",
       }
     }
