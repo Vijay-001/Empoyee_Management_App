@@ -34,7 +34,7 @@ const Header = () => {
             Employee Management App
           </Typography>
           {
-          data ? <Button color="inherit" href="/adminlogin">Logout</Button> : ''
+          data.length ? <Button color="inherit" href="/adminlogin">Logout</Button> : ''
           }
         </Toolbar>
       </AppBar>
