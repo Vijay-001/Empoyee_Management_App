@@ -1,8 +1,8 @@
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
-import { FormValues, MyFormProps } from '../Interface/Interface';
+import { FormValues, MyFormProps } from '../userInterface/userInterface';
 
-export const FormValidation = withFormik<MyFormProps, FormValues>({
+export const loginValidation = withFormik<MyFormProps, FormValues>({
 
   mapPropsToValues: (props) => ({
     email: props.initialEmail || '',
@@ -14,8 +14,12 @@ export const FormValidation = withFormik<MyFormProps, FormValues>({
     password: Yup.string().required('Password is required'),
   }),
 
-  handleSubmit(setSubmitting:any) {
+  handleSubmit(
+    { email, password }: FormValues,
+    { props, setSubmitting, setErrors },
+  ) {
     setSubmitting(false);
+    console.log(email, password);
   },
 
 });

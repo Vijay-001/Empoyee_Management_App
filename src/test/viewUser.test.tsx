@@ -2,21 +2,22 @@ import { shallow } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
-import AdminLogin from '../containers/AdminLogin/AdminLogin';
-import ViewEmployeeDetails from '../containers/View_Employee/ViewEmployee';
+import ViewEmployeeDetails from '../containers/viewUser/view';
 
 const mockStore = configureMockStore();
 const store = mockStore({});
 
 describe('<ViewEmployee/>', () => {
-  let wrapper: any;
-
-  beforeEach(() => {
+  let wrapper = beforeEach(() => {
     wrapper = shallow(
       <Provider store={store}>
         <ViewEmployeeDetails />
       </Provider>,
     );
+  });
+
+  it('should match the snapshot', () => {
+    expect(shallowToJson(wrapper)).toMatchSnapshot();
   });
 
   it('should have a submit button', () => {

@@ -21,34 +21,26 @@ module.exports = {
     '@typescript-eslint',
   ],
     rules: {
-        "no-use-before-define": "off",
-        "@typescript-eslint/no-use-before-define": ["error"],
-        "react/jsx-filename-extension": ["warn", { "extensions": [".tsx"] }],
-        "linebreak-style": 0,
-        "import/prefer-default-export": "off",
-        "react/react-in-jsx-scope": "off",
-        "no-param-reassign": 0,
-        "camelcase": "off",
-        "@typescript-eslint/no-explicit-any": "off",
-        "@typescript-eslint/explicit-module-boundary-types": "off",
-        "@typescript-eslint/no-unused-vars": "off",
-        "@typescript-eslint/naming-convention": [
-            "off",
-            {
-                "selector": "default",
-                "format": null
-            }
-        ],
-    
         "import/extensions": [
             "error",
             "ignorePackages",
             {
+                "js": "never",
+                "jsx": "never",
                 "ts": "never",
                 "tsx": "never"
             }
         ],
-        "react/prop-types": 0
+        "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".ts"] }],
+        "react/react-in-jsx-scope": "off",
+        "@typescript-eslint/no-unused-vars": "off",
+        "no-param-reassign": 0,
+        "no-use-before-define": "off",
+        "camelcase": "off",
+        "import/prefer-default-export": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "no-console": "off",
     },
     "settings": {
         "import/resolver": {

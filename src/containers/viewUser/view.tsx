@@ -9,11 +9,14 @@ import Button from '@material-ui/core/Button';
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { Container } from '@material-ui/core';
-import { Mode } from '../../common/Interface/Interface';
-import UserEditModal from '../Edit_Employee/Edit_Employee';
 import '../../App.scss';
-import { getUserList } from '../../common/Api/Api';
-import { useAppSelector } from '../../store/reducers/reducerHooks';
+import TableContainer from '@material-ui/core/TableContainer';
+import Paper from '@material-ui/core/Paper';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import useAppSelector from '../../store/reducers/reducerHooks';
+import { Mode } from '../../common/userInterface/userInterface';
+import getUserList from '../../common/userApi/viewUser';
+import UserEditModal from '../editUser/edit';
 
 const useStyles = makeStyles({
   table: {
@@ -54,6 +57,7 @@ export default function ViewEmployeeDetails() {
 
   return (
     <Container>
+      <CssBaseline />
       <p />
       <p />
       <p />
@@ -74,43 +78,43 @@ export default function ViewEmployeeDetails() {
       <p />
       <p />
       <p />
-
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell> ID</TableCell>
-            <TableCell> firstName</TableCell>
-            <TableCell> LastName</TableCell>
-            <TableCell> Email</TableCell>
-            <TableCell> Action</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.map((row:any) => (
-            <TableRow key={row.id}>
-              <TableCell component="th" scope="row">
-                {row.id}
-              </TableCell>
-              <TableCell>{row.first_name}</TableCell>
-              <TableCell>{row.last_name}</TableCell>
-              <TableCell>{row.email}</TableCell>
-              <TableCell>
-                {' '}
-                <Button
-                  type="button"
-                  variant="contained"
-                  className="button"
-                  onClick={() => Updatemodel(row)}
-                >
-                  Update
-                </Button>
-              </TableCell>
+      <TableContainer component={Paper}>
+        <Table className={classes.table} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell> ID</TableCell>
+              <TableCell> firstName</TableCell>
+              <TableCell> LastName</TableCell>
+              <TableCell> Email</TableCell>
+              <TableCell> Action</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHead>
+          <TableBody>
+            {data.map((row:any) => (
+              <TableRow key={row.id}>
+                <TableCell component="th" scope="row">
+                  {row.id}
+                </TableCell>
+                <TableCell>{row.first_name}</TableCell>
+                <TableCell>{row.last_name}</TableCell>
+                <TableCell>{row.email}</TableCell>
+                <TableCell>
+                  {' '}
+                  <Button
+                    type="button"
+                    variant="contained"
+                    className="button"
+                    onClick={() => Updatemodel(row)}
+                  >
+                    Update
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
       <UserEditModal show={showModal} onClose={onClose} mode={mode} userInfo={userData as any} />
     </Container>
-
   );
 }

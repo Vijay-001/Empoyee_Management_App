@@ -1,5 +1,5 @@
 import { shallow } from 'enzyme';
-import Header from '../component/Headers/Headers';
+import Header from '../component/header/appBar';
 
 describe('Appbar', () => {
   describe('renders', () => {

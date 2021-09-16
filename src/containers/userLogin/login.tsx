@@ -7,10 +7,9 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { FormikProps } from 'formik';
 import { TextField } from '@material-ui/core';
-import { adminLogin } from '../../common/Api/Api';
-import { FormValues, OtherProps } from '../../common/Interface/Interface';
-import { useAppSelector } from '../../store/reducers/reducerHooks';
-import { FormValidation } from '../../common/Formik/Formik';
+import { FormValues, OtherProps } from '../../common/userInterface/userInterface';
+import adminLogin from '../../common/userApi/userlogin';
+import { loginValidation } from '../../common/formikValidations/userValidation';
 
 const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
   const {
@@ -29,15 +28,14 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const onChangesValues = (fieldName: string, value: string) => {
+  const setUserDetails = (fieldName: string, value: string) => {
     setUserInfoState({
       ...userInfoState,
       [fieldName]: value,
     });
   };
-  const data = useAppSelector((state) => state.users.users);
 
-  const CheckLogindetails = async (e: React.FormEvent<HTMLFormElement>) => {
+  const userLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     handleSubmit();
     if (typeof userInfoState !== 'undefined'
@@ -49,7 +47,7 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
   };
 
   return (
-    <form onSubmit={CheckLogindetails}>
+    <form onSubmit={userLogin}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <p />
@@ -61,10 +59,10 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
             <TextField
               variant="outlined"
               name="email"
-              label="Email Address"
+              placeholder="Email Address"
               size="small"
               margin="normal"
-              onKeyUp={(event: any) => { onChangesValues('email', event.target.value); }}
+              onKeyUp={(event: any) => { setUserDetails('email', event.target.value); }}
               onBlur={handleBlur}
               value={values?.email}
               error={Boolean(touched.email && errors.email)}
@@ -78,11 +76,11 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
             <TextField
               variant="outlined"
               name="password"
-              placeholder="password"
+              placeholder="Password"
               margin="normal"
               size="small"
               type="password"
-              onKeyUp={(event: any) => { onChangesValues('password', event.target.value); }}
+              onKeyUp={(event: any) => { setUserDetails('password', event.target.value); }}
               onChange={handleChange}
               onBlur={handleBlur}
               value={values?.password}
@@ -102,11 +100,12 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
           variant="contained"
           color="primary"
           disabled={
-                        isSubmitting
-                        || !!(errors.email && touched.email)
-                        || !!(errors.password && touched.password)
-                    }
+            isSubmitting
+            || !!(errors.email && touched.email)
+            || !!(errors.password && touched.password)
+           }
         >
+          {' '}
           Sign In
         </Button>
       </Container>
@@ -114,4 +113,4 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
   );
 };
 
-export default (FormValidation)(AdminLoginForm);
+export default (loginValidation)(AdminLoginForm);

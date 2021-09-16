@@ -1,6 +1,6 @@
-import { Types } from '../types';
+import Types from '../types';
 
-export const ActionCreators = {
+const ActionCreators = {
 
   loginSuccess: (user: any) => ({
     type: Types.Login_Success,
@@ -48,3 +48,5 @@ export const ActionCreators = {
   }),
 
 };
+
+export default ActionCreators;

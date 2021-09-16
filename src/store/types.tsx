@@ -1,4 +1,4 @@
-export const Types = {
+const Types = {
 
   Loging_Process: 'Loging_Process',
   Login_Success: 'Login_Success',
@@ -21,3 +21,5 @@ export const Types = {
   Update_Employee_Failed: 'Update_Employee_Failed',
 
 };
+
+export default Types;

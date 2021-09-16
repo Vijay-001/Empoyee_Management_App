@@ -1,10 +1,9 @@
-import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
 import { StylesProvider } from '@material-ui/core/styles';
 import Navigation from './navigation/navigation';
-import Header from './component/Headers/Headers';
+import Header from './component/header/appBar';
 import { store } from './store/index';
 
 const queryClient = new QueryClient();

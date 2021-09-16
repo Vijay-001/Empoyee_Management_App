@@ -33,26 +33,13 @@ export interface IProps {
     mode: string
 }
 
-export interface IUserListState {
-    users: IApiObject<IUser[]>;
-}
-
-export interface IApiObject<T> {
-    data: T,
-    isFetching: false,
-    isUpdating: boolean,
-    isError: false,
-    errorMessage: '',
-    error: Error
-}
-
 export const Mode = {
   NEW: 'Add Employee',
   EDIT: 'Edit Employee',
 };
 
 export interface Myprops {
-    appbarMessage?: string,
+    appbarMessage?: 'Employee Management App',
     LoginText?: string
 }
 

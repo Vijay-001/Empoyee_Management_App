@@ -3,4 +3,6 @@ import { IStateReduced } from '../index';
 
 // Created Custom Hook.
 
-export const useAppSelector: TypedUseSelectorHook<IStateReduced> = useSelector;
+const useAppSelector: TypedUseSelectorHook<IStateReduced> = useSelector;
+
+export default useAppSelector;

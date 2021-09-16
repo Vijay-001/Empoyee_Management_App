@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import AdminLogin from '../containers/AdminLogin/AdminLogin';
-import ViewEmployee from '../containers/View_Employee/ViewEmployee';
+import AdminLogin from '../containers/userLogin/login';
+import ViewEmployee from '../containers/viewUser/view';
 
 const Navigation = () => (
   <Router>
