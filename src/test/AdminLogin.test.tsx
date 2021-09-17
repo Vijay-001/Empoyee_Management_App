@@ -36,4 +36,8 @@ describe('<AdminLogin/>', () => {
   it('should have a password field', () => {
     expect(wrapper.find('Password').length).toEqual(0);
   });
+
+  it('should have a submit button', () => {
+    expect(wrapper.find('Button').length).toEqual(0);
+  });
 });

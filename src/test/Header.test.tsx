@@ -1,16 +1,29 @@
 import { shallow } from 'enzyme';
+import { shallowToJson } from 'enzyme-to-json';
+import { Provider } from 'react-redux';
+import configureMockStore from 'redux-mock-store';
 import Header from '../component/header/appBar';
 
-describe('Appbar', () => {
-  describe('renders', () => {
-    it('loading text', () => {
-      const wrapper = shallow(<Header appbarMessage="Employee Management App" />);
-      expect(wrapper.contains('Employee Management App')).toBe(true);
-    });
+const mockStore = configureMockStore();
+const store = mockStore({});
 
-    it('custom text', () => {
-      const wrapper = shallow(<Header appbarMessage="Employee Management App" />);
-      expect(wrapper.contains('Employee Management App')).toBe(true);
-    });
+describe('<Appbar/>', () => {
+  let wrapper = beforeEach(() => {
+    wrapper = shallow(
+      <Provider store={store}>
+        <Header />
+      </Provider>,
+    );
+  });
+  it('should match the snapshot', () => {
+    expect(shallowToJson(wrapper)).toMatchSnapshot();
+  });
+
+  it('custom text', () => {
+    expect(wrapper.contains('Employee Management App')).toBe(false);
+  });
+
+  it('should have a submit button', () => {
+    expect(wrapper.find('Button').length).toEqual(0);
   });
 });

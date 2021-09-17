@@ -11,8 +11,7 @@ const adminLogin = (values: IUser) => async (dispatch: Dispatch<any>,
       if (!res.data) {
         dispatch(ActionCreators.loginFailed());
       } else {
-        const existingdata = getState()?.users?.users;
-        const newselection = [...existingdata, res.data];
+        const newselection = [res.data];
         dispatch(ActionCreators.loginSuccess(newselection));
       }
     }).catch((error) => {

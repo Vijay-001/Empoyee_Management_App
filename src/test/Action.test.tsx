@@ -1,5 +1,5 @@
 import ActionCreators from '../store/actions/actions';
-import { Types } from '../store/types';
+import Types from '../store/types';
 
 describe('Login_Success actions', () => {
   test('login requested', () => {

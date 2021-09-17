@@ -2,10 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\common\\userInterface",
-    "\\src\\containers",
-    "\\src\\containers\\viewUser"
+    "\\src\\common\\userApi",
+    "\\src\\component\\header"
   ],
-  "SelectedNode": "\\src\\containers\\viewUser\\view.tsx",
+  "SelectedNode": "\\package.json",
   "PreviewInSolutionExplorer": false
 }
