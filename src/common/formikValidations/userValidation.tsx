@@ -19,7 +19,6 @@ export const loginValidation = withFormik<MyFormProps, FormValues>({
     { props, setSubmitting, setErrors },
   ) {
     setSubmitting(false);
-    console.log(email, password);
   },
 
 });
