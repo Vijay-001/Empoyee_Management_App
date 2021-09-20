@@ -40,6 +40,7 @@ module.exports = {
         "import/prefer-default-export": "off",
         "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
+         "no-alert": "off",
     },
     "settings": {
         "import/resolver": {

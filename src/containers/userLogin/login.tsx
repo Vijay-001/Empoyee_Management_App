@@ -25,6 +25,7 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
   } = props;
 
   const [userInfoState, setUserInfoState] = useState(userInfo);
+  const [flag, setFlag] = useState('');
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -41,8 +42,11 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
     handleSubmit();
     if (typeof userInfoState !== 'undefined'
           && ('email' in userInfoState)
-        && ('password' in userInfoState)) {
+          && ('password' in userInfoState)) {
+      setFlag('true');
       await dispatch(adminLogin(userInfoState));
+    } else {
+      setFlag('false');
     }
   };
 
@@ -50,6 +54,9 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
   if (data !== 'undefined') {
     if (Array.isArray(data) && data.length) {
       history.push('/ViewEmployee');
+    } else if (flag === 'true') {
+      alert('Invalid login credentials');
+      setFlag('false');
     }
   }
 
