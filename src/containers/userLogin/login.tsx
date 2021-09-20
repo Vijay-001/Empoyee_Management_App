@@ -10,6 +10,7 @@ import { TextField } from '@material-ui/core';
 import { FormValues, OtherProps } from '../../common/userInterface/userInterface';
 import adminLogin from '../../common/userApi/userlogin';
 import { loginValidation } from '../../common/formikValidations/userValidation';
+import useAppSelector from '../../store/reducers/reducerHooks';
 
 const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
   const {
@@ -42,9 +43,15 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
           && ('email' in userInfoState)
         && ('password' in userInfoState)) {
       await dispatch(adminLogin(userInfoState));
-      history.push('/ViewEmployee');
     }
   };
+
+  const data = useAppSelector((state) => state.users.users);
+  if (data !== 'undefined') {
+    if (Array.isArray(data) && data.length) {
+      history.push('/ViewEmployee');
+    }
+  }
 
   return (
     <form onSubmit={userLogin}>
