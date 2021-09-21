@@ -31,12 +31,12 @@ module.exports = {
                 "tsx": "never"
             }
         ],
+        "camelcase": "off",
         "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".ts"] }],
         "react/react-in-jsx-scope": "off",
         "@typescript-eslint/no-unused-vars": "off",
         "no-param-reassign": 0,
-        "no-use-before-define": "off",
-        "camelcase": "off",
+        "no-use-before-define": "off",       
         "import/prefer-default-export": "off",
         "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
