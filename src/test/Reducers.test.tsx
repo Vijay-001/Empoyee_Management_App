@@ -1,29 +1,94 @@
 import reducer from '../store/reducers/reducer';
+import Types from '../store/types';
 
-describe('UserReducer', () => {
-  test('login reducer  check with wrong action', () => {
-    const payloaddata = {
-      user: [{ token: 'QpwL5tke4Pnpja7X4' }],
-    };
-    const action = { type: 'log', payload: payloaddata };
-    const initialState = {
-      users: [],
-    };
-    expect(reducer(undefined, action)).toEqual(initialState);
+describe('user reducer', () => {
+  describe('login users reducer', () => {
+    it('view users reducer expected state', () => {
+      const reqUserData = {
+        user: [
+          {
+            email: 'eve.holt@reqres.in',
+            password: 'pistol',
+          },
+        ],
+      };
+      const action = {
+        payload: reqUserData,
+        type: Types.Login_Success,
+      };
+
+      const updatedState = reducer(undefined, action);
+      expect(updatedState.users).toHaveLength(1);
+      expect(updatedState.users).toEqual(reqUserData.user);
+    });
   });
 
-  test('Add employee reducer check with wrong action', () => {
-    const payloaddata = {
-      user: [{
-        firstName: 'test',
-        lastName: 'testdata',
-        email: 'test@gmail.com',
-      }],
-    };
-    const action = { type: 'Addempoloyee', payload: payloaddata };
-    const initialState = {
-      users: [],
-    };
-    expect(reducer(undefined, action)).toEqual(initialState);
+  describe('add users reducer', () => {
+    it('add users reducer expected state', () => {
+      const reqUserData = {
+        user: [
+          {
+            firstName: 'test',
+            lastName: 'testdata',
+            email: 'test@gmail.com',
+          },
+        ],
+      };
+      const action = {
+        payload: reqUserData,
+        type: Types.Add_Employee_Sucess,
+      };
+
+      const updatedState = reducer(undefined, action);
+      expect(updatedState.users).toHaveLength(1);
+      expect(updatedState.users).toEqual(reqUserData.user);
+    });
+  });
+
+  describe('update users reducer', () => {
+    it('update users reducer expected state', () => {
+      const reqUserData = {
+        user: [
+          {
+            id: 5,
+            email: 'charles.morris@reqres.in',
+            first_name: 'Charles',
+            last_name: 'Morris',
+          },
+        ],
+      };
+      const action = {
+        payload: reqUserData,
+        type: Types.Update_Employee_Success,
+      };
+
+      const updatedState = reducer(undefined, action);
+      expect(updatedState.users).toHaveLength(1);
+      expect(updatedState.users).toEqual(reqUserData.user);
+    });
+  });
+
+  describe('view users reducer', () => {
+    it('view users reducer expected state', () => {
+      const reqUserData = {
+        user: [
+          {
+            id: 1,
+            email: 'george.bluth@reqres.in',
+            first_name: 'George',
+            last_name: 'Bluth',
+            avatar: 'https://reqres.in/img/faces/1-image.jpg',
+          },
+        ],
+      };
+      const action = {
+        payload: reqUserData,
+        type: Types.Loading_Employee_Success,
+      };
+
+      const updatedState = reducer(undefined, action);
+      expect(updatedState.users).toHaveLength(1);
+      expect(updatedState.users).toEqual(reqUserData.user);
+    });
   });
 });

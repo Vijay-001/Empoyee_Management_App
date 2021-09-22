@@ -2,8 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\containers\\viewUser"
+    "\\src\\common",
+    "\\src\\containers\\userLogin",
+    "\\src\\containers\\viewUser",
+    "\\src\\store\\actions",
+    "\\src\\test"
   ],
-  "SelectedNode": "\\babel.config.js",
+  "SelectedNode": "\\src\\test\\reducers.test.tsx",
   "PreviewInSolutionExplorer": false
 }

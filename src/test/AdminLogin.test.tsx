@@ -16,6 +16,18 @@ describe('<AdminLogin/>', () => {
     avatar: '',
     password: '',
   };
+  const expectedActions = [
+    {
+      type: 'Add_Employee_Sucess',
+      payload: {
+        user: {
+          email: 'test',
+          firstName: 'test',
+          lastName: 'test@gmail.com',
+        },
+      },
+    },
+  ];
 
   let wrapper = beforeEach(() => {
     wrapper = shallow(
