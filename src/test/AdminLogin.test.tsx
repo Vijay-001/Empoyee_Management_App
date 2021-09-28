@@ -1,14 +1,17 @@
-import { shallow } from 'enzyme';
-import { shallowToJson } from 'enzyme-to-json';
-import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
+import { Provider } from 'react-redux';
+import { mount, shallow } from 'enzyme';
+import { TextField } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import { fireEvent, render } from '@testing-library/react';
+import { shallowToJson } from 'enzyme-to-json';
 import AdminLogin from '../containers/userLogin/login';
 
 const mockStore = configureMockStore();
 const store = mockStore({});
 
 describe('<AdminLogin/>', () => {
-  const props = {
+  const fieldprops = {
     first_name: '',
     id: '',
     last_name: '',
@@ -16,23 +19,11 @@ describe('<AdminLogin/>', () => {
     avatar: '',
     password: '',
   };
-  const expectedActions = [
-    {
-      type: 'Add_Employee_Sucess',
-      payload: {
-        user: {
-          email: 'test',
-          firstName: 'test',
-          lastName: 'test@gmail.com',
-        },
-      },
-    },
-  ];
 
   let wrapper = beforeEach(() => {
     wrapper = shallow(
       <Provider store={store}>
-        <AdminLogin userInfo={props} />
+        <AdminLogin userInfo={fieldprops} />
       </Provider>,
     );
   });
@@ -41,15 +32,36 @@ describe('<AdminLogin/>', () => {
     expect(shallowToJson(wrapper)).toMatchSnapshot();
   });
 
-  it('should have an email field', () => {
-    expect(wrapper.find('Email').length).toEqual(0);
+  const LoginComponent = (props:any) => (
+    <Provider store={store}>
+      <AdminLogin userInfo={fieldprops} />
+    </Provider>
+  );
+
+  it('renders a <TextField/> and <Button />component', () => {
+    const Wrapper = mount(<LoginComponent />);
+    expect(Wrapper.find(TextField)).toHaveLength(2);
+    expect(Wrapper.find(Button)).toHaveLength(1);
   });
 
-  it('should have a password field', () => {
-    expect(wrapper.find('Password').length).toEqual(0);
+  it('renders default state values', () => {
+    const { getByTestId } = render(<LoginComponent />);
+    const password = getByTestId('userAccountPassword') as HTMLInputElement;
+    const email = getByTestId('userAccountEmail') as HTMLInputElement;
+    const submit = getByTestId('submitUserDetails');
+    fireEvent.click(submit);
+    expect(password.value).toBe('');
+    expect(email.value).toBe('');
+    expect(submit).toHaveClass('Mui-disabled');
   });
 
-  it('should have a submit button', () => {
-    expect(wrapper.find('Button').length).toEqual(0);
+  it('disabled submit for invalid emailId and password', () => {
+    const { getByTestId } = render(<LoginComponent />);
+    const email = getByTestId('userAccountEmail');
+    const password = getByTestId('userAccountPassword');
+    const button = getByTestId('submitUserDetails');
+    fireEvent.change(email, { target: { value: 'vk@gmail.com' } });
+    fireEvent.change(password, { target: { value: 'data100' } });
+    expect(button).not.toHaveClass('Mui-disabled');
   });
 });

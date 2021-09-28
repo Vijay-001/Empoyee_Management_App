@@ -25,7 +25,7 @@ const reducer = (state = initialState, action: any) => {
     case Types.Loading_Employee_Failed:
       return {
         ...state,
-        users: action.payload.user,
+        users: action.payload,
       };
 
     case Types.Add_Employee_Sucess:

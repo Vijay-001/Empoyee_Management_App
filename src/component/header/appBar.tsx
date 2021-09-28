@@ -21,8 +21,12 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = () => {
   const classes = useStyles();
-  const data = useAppSelector((state) => state.users.users);
-
+  const data = useAppSelector((state) => {
+    if (state && state !== undefined && state.users) {
+      return state.users.users;
+    }
+    return null;
+  });
   return (
     <div className={classes.root}>
       <AppBar position="static">

@@ -91,4 +91,50 @@ describe('user reducer', () => {
       expect(updatedState.users).toEqual(reqUserData.user);
     });
   });
+
+  describe('add users reducer', () => {
+    it('add users reducer failed state', () => {
+      const failedAction = {
+        type: Types.Add_Employee_Failed,
+      };
+      const updatedState = reducer(undefined, failedAction);
+      expect(updatedState).toEqual({});
+    });
+  });
+
+  describe('update users reducer', () => {
+    it('update users reducer failed state', () => {
+      const failedAction = {
+        type: Types.Update_Employee_Failed,
+      };
+      const updatedState = reducer(undefined, failedAction);
+      expect(updatedState).toEqual({});
+    });
+  });
+  describe('login users reducer', () => {
+    it('login users reducer failed state', () => {
+      const failedAction = {
+        type: Types.Login_Failed,
+      };
+      const updatedState = reducer(undefined, failedAction);
+      expect(updatedState).toEqual({});
+    });
+  });
+  describe('view users failed reducer ', () => {
+    it('view users reducer failed state', () => {
+      const failedAction = {
+        type: Types.Loading_Employee_Failed,
+      };
+      const updatedState = reducer(undefined, failedAction);
+      expect(updatedState).toEqual({});
+    });
+  });
+  describe('INITIAL_STATE', () => {
+    test('is correct', () => {
+      const action = { type: 'dummy_action' };
+      const initialState: any = [];
+      const updatedState = reducer(undefined, action);
+      expect(updatedState.users).toEqual(initialState);
+    });
+  });
 });

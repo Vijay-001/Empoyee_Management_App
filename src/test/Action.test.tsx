@@ -107,4 +107,52 @@ describe('user actions', () => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
+
+  describe('login user failed action', () => {
+    it('should dispatch the login user failed action', () => {
+      const expectedActions = [
+        {
+          type: Types.Login_Failed,
+        },
+      ];
+      store.dispatch(ActionCreators.loginFailed());
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  describe('add user failed action', () => {
+    it('should dispatch the add user failed action', () => {
+      const expectedActions = [
+        {
+          type: Types.Add_Employee_Failed,
+        },
+      ];
+      store.dispatch(ActionCreators.AddEmployeeFailed());
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  describe('view user failed actions', () => {
+    it('should dispatch the view user failed action', () => {
+      const expectedActions = [
+        {
+          type: Types.Loading_Employee_Failed,
+        },
+      ];
+      store.dispatch(ActionCreators.loadingEmployeeFailed());
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  describe('update failed user actions', () => {
+    it('should dispatch the update failed user action', () => {
+      const expectedActions = [
+        {
+          type: Types.Update_Employee_Failed,
+        },
+      ];
+      store.dispatch(ActionCreators.UpdateEmployeeFailed());
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
 });

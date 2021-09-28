@@ -11,15 +11,6 @@ const ActionCreators = {
     type: Types.Login_Failed,
   }),
 
-  signupSuccess: (user: any) => ({
-    type: Types.Signup_Success,
-    payload: { user },
-  }),
-
-  signupFailed: () => ({
-    type: Types.Signup_Failed,
-  }),
-
   loadingEmployeeSuccess: (user: any) => ({
     type: Types.Loading_Employee_Success,
     payload: { user },

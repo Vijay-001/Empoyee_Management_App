@@ -25,7 +25,6 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
   } = props;
 
   const [userInfoState, setUserInfoState] = useState(userInfo);
-  const [flag, setFlag] = useState('');
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -43,20 +42,20 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
     if (typeof userInfoState !== 'undefined'
           && ('email' in userInfoState)
           && ('password' in userInfoState)) {
-      setFlag('true');
       await dispatch(adminLogin(userInfoState));
-    } else {
-      setFlag('false');
     }
   };
 
-  const data = useAppSelector((state) => state.users.users);
+  const data = useAppSelector((state) => {
+    if (state && state !== undefined && state.users) {
+      return state.users.users;
+    }
+    return null;
+  });
+
   if (data !== 'undefined') {
     if (Array.isArray(data) && data.length) {
       history.push('/ViewEmployee');
-    } else if (flag === 'true') {
-      alert('Invalid login credentials');
-      setFlag('false');
     }
   }
 
@@ -82,6 +81,8 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
               error={Boolean(touched.email && errors.email)}
               helperText={touched.email && errors.email}
               onChange={handleChange}
+              InputLabelProps={{ shrink: true }}
+              inputProps={{ 'data-testid': 'userAccountEmail' }}
               fullWidth
             />
           </Grid>
@@ -100,6 +101,8 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
               value={values?.password}
               error={Boolean(touched.password && errors.password)}
               helperText={touched.password && errors.password}
+              InputLabelProps={{ shrink: true }}
+              inputProps={{ 'data-testid': 'userAccountPassword' }}
               fullWidth
             />
           </Grid>
@@ -113,6 +116,7 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
           fullWidth
           variant="contained"
           color="primary"
+          data-testid="submitUserDetails"
           disabled={
             isSubmitting
             || !!(errors.email && touched.email)

@@ -17,6 +17,7 @@ import useAppSelector from '../../store/reducers/reducerHooks';
 import { Mode } from '../../common/userInterface/userInterface';
 import getUserList from '../../common/userApi/viewUser';
 import UserEditModal from '../editUser/edit';
+import Types from '../../store/types';
 
 const useStyles = makeStyles({
   table: {
@@ -27,8 +28,6 @@ const useStyles = makeStyles({
 export default function ViewEmployeeDetails() {
   const dispatch = useDispatch();
 
-  const data = useAppSelector((state) => state.users.users);
-
   const [mode, setMode] = useState(Mode.EDIT);
 
   const [showModal, setShowModal] = useState(false);
@@ -38,8 +37,18 @@ export default function ViewEmployeeDetails() {
   const onClose = () => { setShowModal(false); };
 
   useEffect(() => {
-    dispatch(getUserList);
+    dispatch({
+      type: Types.Loading_Employee_Success,
+      payload: getUserList(dispatch),
+    });
   }, []);
+
+  const data = useAppSelector((state) => {
+    if (state && state !== undefined && state.users) {
+      return state.users.users;
+    }
+    return null;
+  });
 
   const Updatemodel = (updata:any) => {
     setMode(Mode.EDIT);
@@ -89,29 +98,39 @@ export default function ViewEmployeeDetails() {
               <TableCell> Action</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
-            {data.map((row:any) => (
-              <TableRow key={row.id}>
-                <TableCell component="th" scope="row">
-                  {row.id}
-                </TableCell>
-                <TableCell>{row.first_name}</TableCell>
-                <TableCell>{row.last_name}</TableCell>
-                <TableCell>{row.email}</TableCell>
-                <TableCell>
-                  {' '}
-                  <Button
-                    type="button"
-                    variant="contained"
-                    className="button"
-                    onClick={() => Updatemodel(row)}
-                  >
-                    Update
-                  </Button>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
+          {
+                      typeof data !== 'undefined' && Array.isArray(data) && data.length ? (
+                        <TableBody>
+                          {data.map((row: any) => (
+                            <TableRow key={row.id}>
+                              <TableCell component="th" scope="row">
+                                {row.id}
+                              </TableCell>
+                              <TableCell>{row.first_name}</TableCell>
+                              <TableCell>{row.last_name}</TableCell>
+                              <TableCell>{row.email}</TableCell>
+                              <TableCell>
+                                {' '}
+                                <Button
+                                  type="button"
+                                  variant="contained"
+                                  className="button"
+                                  onClick={() => Updatemodel(row)}
+                                >
+                                  Update
+                                </Button>
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      ) : (
+                        <TableBody>
+                          <TableRow>
+                            <TableCell>User data not found</TableCell>
+                          </TableRow>
+                        </TableBody>
+                      )
+                  }
         </Table>
       </TableContainer>
       <UserEditModal show={showModal} onClose={onClose} mode={mode} userInfo={userData as any} />

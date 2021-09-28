@@ -12,7 +12,6 @@ const getUserList = async (dispatch: Dispatch<any>): Promise<void> => {
       }
     }).catch((error) => {
       dispatch(ActionCreators.loadingEmployeeFailed());
-      return error;
     });
 };
 
