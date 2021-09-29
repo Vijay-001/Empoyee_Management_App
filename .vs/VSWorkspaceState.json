@@ -2,12 +2,13 @@
   "ExpandedNodes": [
     "",
     "\\src",
+    "\\src\\common",
+    "\\src\\common\\userApi",
     "\\src\\common\\userInterface",
-    "\\src\\containers",
     "\\src\\containers\\userLogin",
-    "\\src\\containers\\viewUser",
+    "\\src\\store\\actions",
     "\\src\\test"
   ],
-  "SelectedNode": "\\src\\test\\viewUser.test.tsx",
+  "SelectedNode": "\\src\\common\\userApi\\userlogin.tsx",
   "PreviewInSolutionExplorer": false
 }

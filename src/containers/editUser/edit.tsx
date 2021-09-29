@@ -1,20 +1,15 @@
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Button, Modal } from 'react-bootstrap';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { TextField, Container } from '@material-ui/core';
-import '../../App.scss';
-import { IProps, Mode } from '../../common/userInterface/userInterface';
-import updateUserDetails from '../../common/userApi/userEdit';
-import addUserDetails from '../../common/userApi/addUser';
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { Button, Modal } from "react-bootstrap";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { TextField, Container } from "@material-ui/core";
+import "../../App.scss";
+import { IProps, Mode } from "../../common/userInterface/userInterface";
+import updateUserDetails from "../../common/userApi/userEdit";
+import addUserDetails from "../../common/userApi/addUser";
 
-const userEditModal: React.FC<IProps> = (props) => {
-  const {
-    show,
-    onClose,
-    mode,
-    userInfo,
-  } = props;
+const UserEditModal: React.FC<IProps> = (props) => {
+  const { show, onClose, mode, userInfo } = props;
   const [userInfoState, setUserInfoState] = useState(userInfo);
   const dispatch = useDispatch();
 
@@ -29,7 +24,7 @@ const userEditModal: React.FC<IProps> = (props) => {
   };
 
   useEffect(() => {
-    if (userInfo === null || typeof userInfo === 'undefined') {
+    if (userInfo === null || typeof userInfo === "undefined") {
       setUserInfoState(null as any);
     } else {
       setUserInfoState({
@@ -37,6 +32,7 @@ const userEditModal: React.FC<IProps> = (props) => {
         ...userInfo,
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userInfo]);
 
   const setUserDetails = (fieldName: string, value: string) => {
@@ -51,11 +47,7 @@ const userEditModal: React.FC<IProps> = (props) => {
       <CssBaseline />
       <Modal show={show} onHide={onClose}>
         <Modal.Header closeButton>
-          <Modal.Title>
-            {mode}
-            {' '}
-            Modal
-          </Modal.Title>
+          <Modal.Title>{mode} Modal</Modal.Title>
         </Modal.Header>
         <form onSubmit={onSaveModal}>
           <Modal.Body>
@@ -66,7 +58,9 @@ const userEditModal: React.FC<IProps> = (props) => {
               placeholder="FirstName"
               size="small"
               margin="normal"
-              onChange={(event: any) => { setUserDetails('first_name', event.target.value); }}
+              onChange={(event: any) => {
+                setUserDetails("first_name", event.target.value);
+              }}
               value={userInfoState?.first_name}
               fullWidth
             />
@@ -78,7 +72,9 @@ const userEditModal: React.FC<IProps> = (props) => {
               placeholder="LastName"
               size="small"
               margin="normal"
-              onChange={(event: any) => { setUserDetails('last_name', event.target.value); }}
+              onChange={(event: any) => {
+                setUserDetails("last_name", event.target.value);
+              }}
               value={userInfoState?.last_name}
               fullWidth
             />
@@ -91,20 +87,18 @@ const userEditModal: React.FC<IProps> = (props) => {
               placeholder="Email Address"
               size="small"
               margin="normal"
-              onChange={(event: any) => { setUserDetails('email', event.target.value); }}
+              onChange={(event: any) => {
+                setUserDetails("email", event.target.value);
+              }}
               value={userInfoState?.email}
               fullWidth
             />
-
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={onClose}>
               Close
             </Button>
-            <Button
-              variant="primary"
-              type="submit"
-            >
+            <Button variant="primary" type="submit">
               Save Changes
             </Button>
           </Modal.Footer>
@@ -114,4 +108,4 @@ const userEditModal: React.FC<IProps> = (props) => {
   );
 };
 
-export default userEditModal;
+export default UserEditModal;

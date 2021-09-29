@@ -1,23 +1,23 @@
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import { useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react';
-import { Container } from '@material-ui/core';
-import '../../App.scss';
-import TableContainer from '@material-ui/core/TableContainer';
-import Paper from '@material-ui/core/Paper';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import useAppSelector from '../../store/reducers/reducerHooks';
-import { Mode } from '../../common/userInterface/userInterface';
-import getUserList from '../../common/userApi/viewUser';
-import UserEditModal from '../editUser/edit';
-import Types from '../../store/types';
+import { makeStyles } from "@material-ui/core/styles";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { Container } from "@material-ui/core";
+import "../../App.scss";
+import TableContainer from "@material-ui/core/TableContainer";
+import Paper from "@material-ui/core/Paper";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import useAppSelector from "../../store/reducers/reducerHooks";
+import { Mode } from "../../common/userInterface/userInterface";
+import getUserList from "../../common/userApi/viewUser";
+import UserEditModal from "../editUser/edit";
+import Types from "../../store/types";
 
 const useStyles = makeStyles({
   table: {
@@ -34,14 +34,16 @@ export default function ViewEmployeeDetails() {
 
   const [userData, setUserData] = useState(null);
 
-  const onClose = () => { setShowModal(false); };
+  const onClose = () => {
+    setShowModal(false);
+  };
 
   useEffect(() => {
     dispatch({
       type: Types.Loading_Employee_Success,
       payload: getUserList(dispatch),
     });
-  }, []);
+  }, [dispatch]);
 
   const data = useAppSelector((state) => {
     if (state && state !== undefined && state.users) {
@@ -50,13 +52,13 @@ export default function ViewEmployeeDetails() {
     return null;
   });
 
-  const Updatemodel = (updata:any) => {
+  const Updatemodel = (updata: any) => {
     setMode(Mode.EDIT);
     setUserData(updata);
     setShowModal(true);
   };
 
-  const onNewModel = (newdata:any) => {
+  const onNewModel = () => {
     setMode(Mode.NEW);
     setUserData(null);
     setShowModal(true);
@@ -77,7 +79,7 @@ export default function ViewEmployeeDetails() {
           type="button"
           variant="contained"
           className="buttonPrimary"
-          onClick={() => onNewModel(data)}
+          onClick={() => onNewModel()}
         >
           Add Employee
         </Button>
@@ -98,42 +100,45 @@ export default function ViewEmployeeDetails() {
               <TableCell> Action</TableCell>
             </TableRow>
           </TableHead>
-          {
-                      typeof data !== 'undefined' && Array.isArray(data) && data.length ? (
-                        <TableBody>
-                          {data.map((row: any) => (
-                            <TableRow key={row.id}>
-                              <TableCell component="th" scope="row">
-                                {row.id}
-                              </TableCell>
-                              <TableCell>{row.first_name}</TableCell>
-                              <TableCell>{row.last_name}</TableCell>
-                              <TableCell>{row.email}</TableCell>
-                              <TableCell>
-                                {' '}
-                                <Button
-                                  type="button"
-                                  variant="contained"
-                                  className="button"
-                                  onClick={() => Updatemodel(row)}
-                                >
-                                  Update
-                                </Button>
-                              </TableCell>
-                            </TableRow>
-                          ))}
-                        </TableBody>
-                      ) : (
-                        <TableBody>
-                          <TableRow>
-                            <TableCell>User data not found</TableCell>
-                          </TableRow>
-                        </TableBody>
-                      )
-                  }
+          {typeof data !== "undefined" && Array.isArray(data) && data.length ? (
+            <TableBody>
+              {data.map((row: any) => (
+                <TableRow key={row.id}>
+                  <TableCell component="th" scope="row">
+                    {row.id}
+                  </TableCell>
+                  <TableCell>{row.first_name}</TableCell>
+                  <TableCell>{row.last_name}</TableCell>
+                  <TableCell>{row.email}</TableCell>
+                  <TableCell>
+                    {" "}
+                    <Button
+                      type="button"
+                      variant="contained"
+                      className="button"
+                      onClick={() => Updatemodel(row)}
+                    >
+                      Update
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          ) : (
+            <TableBody>
+              <TableRow>
+                <TableCell>User data not found</TableCell>
+              </TableRow>
+            </TableBody>
+          )}
         </Table>
       </TableContainer>
-      <UserEditModal show={showModal} onClose={onClose} mode={mode} userInfo={userData as any} />
+      <UserEditModal
+        show={showModal}
+        onClose={onClose}
+        mode={mode}
+        userInfo={userData as any}
+      />
     </Container>
   );
 }

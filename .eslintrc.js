@@ -1,51 +1,40 @@
+
 module.exports = {
-  env: {
-    browser: true,
-    es2021: true,
-  },
-  extends: [
-    'plugin:react/recommended',
-      'airbnb',
-      "plugin:@typescript-eslint/recommended"
-  ],
-  parser: '@typescript-eslint/parser',
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
+    extends: [
+        'airbnb-typescript',
+        'airbnb/hooks',
+        'plugin:@typescript-eslint/recommended',
+        'plugin:jest/recommended',
+        'plugin:prettier/recommended'
+    ],
+    plugins: ['react', '@typescript-eslint', 'jest', 'import'],
+    env: {
+        browser: true,
+        es6: true,
+        jest: true,
     },
-    ecmaVersion: 12,
-    sourceType: 'module',
-  },
-  plugins: [
-    'react',
-    '@typescript-eslint',
-  ],
+    globals: {
+        Atomics: 'readonly',
+        SharedArrayBuffer: 'readonly',
+    },
+    parser: '@typescript-eslint/parser',
+    parserOptions: {
+        ecmaFeatures: {
+            jsx: true,
+        },
+        ecmaVersion: 2018,
+        sourceType: 'module',
+        project: './tsconfig.json',
+    },
     rules: {
-        "import/extensions": [
-            "error",
-            "ignorePackages",
+        'linebreak-style': 'off',
+        'prettier/prettier': [
+            'error',
             {
-                "js": "never",
-                "jsx": "never",
-                "ts": "never",
-                "tsx": "never"
-            }
+                endOfLine: 'auto',
+            },
         ],
-        "camelcase": "off",
-        "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".ts"] }],
-        "react/react-in-jsx-scope": "off",
-        "@typescript-eslint/no-unused-vars": "off",
-        "no-param-reassign": 0,
-        "no-use-before-define": "off",       
-        "import/prefer-default-export": "off",
-        "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
-        "no-alert": "off",
-        "no-console": "off"
+        "@typescript-eslint/no-explicit-any": "off",
     },
-    "settings": {
-        "import/resolver": {
-            "typescript": {}
-        }
-    }
 };

@@ -1,16 +1,17 @@
-import axios from 'axios';
-import { Dispatch } from 'react';
-import ActionCreators from '../../store/actions/actions';
+import axios from "axios";
+import { Dispatch } from "react";
+import ActionCreators from "../../store/actions/actions";
 
 const getUserList = async (dispatch: Dispatch<any>): Promise<void> => {
-  await axios.get('https://reqres.in/api/users')
+  await axios({ url: "https://reqres.in/api/users", method: "get", data: {} })
     .then((res) => {
       if (!res.data) {
         dispatch(ActionCreators.loadingEmployeeFailed());
       } else {
         dispatch(ActionCreators.loadingEmployeeSuccess(res.data.data));
       }
-    }).catch((error) => {
+    })
+    .catch(() => {
       dispatch(ActionCreators.loadingEmployeeFailed());
     });
 };

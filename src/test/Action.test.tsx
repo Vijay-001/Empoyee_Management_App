@@ -1,9 +1,8 @@
-import configureMockStore from 'redux-mock-store';
-import ActionCreators from '../store/actions/actions';
-import Types from '../store/types';
-import reducer from '../store/reducers/reducer';
+import configureMockStore from "redux-mock-store";
+import ActionCreators from "../store/actions/actions";
+import Types from "../store/types";
 
-describe('user actions', () => {
+describe("user actions", () => {
   const mockStore = configureMockStore();
   const store = mockStore({});
 
@@ -11,16 +10,16 @@ describe('user actions', () => {
     store.clearActions();
   });
 
-  describe('login user action', () => {
-    it('should dispatch the login user action', () => {
-      const reqUserData = { email: 'eve.holt@reqres.in', password: 'pistol' };
+  describe("login user action", () => {
+    it("should dispatch the login user action", () => {
+      const reqUserData = { email: "eve.holt@reqres.in", password: "pistol" };
       const expectedActions = [
         {
           type: Types.Login_Success,
           payload: {
             user: {
-              email: 'eve.holt@reqres.in',
-              password: 'pistol',
+              email: "eve.holt@reqres.in",
+              password: "pistol",
             },
           },
         },
@@ -30,17 +29,21 @@ describe('user actions', () => {
     });
   });
 
-  describe('add user action', () => {
-    it('should dispatch the add user action', () => {
-      const reqUserData = { email: 'test', firstName: 'test', lastName: 'test@gmail.com' };
+  describe("add user action", () => {
+    it("should dispatch the add user action", () => {
+      const reqUserData = {
+        email: "test",
+        firstName: "test",
+        lastName: "test@gmail.com",
+      };
       const expectedActions = [
         {
           type: Types.Add_Employee_Sucess,
           payload: {
             user: {
-              email: 'test',
-              firstName: 'test',
-              lastName: 'test@gmail.com',
+              email: "test",
+              firstName: "test",
+              lastName: "test@gmail.com",
             },
           },
         },
@@ -50,15 +53,17 @@ describe('user actions', () => {
     });
   });
 
-  describe('view user actions', () => {
-    it('should dispatch the view user action', () => {
-      const reqUserData = [{
-        id: 1,
-        email: 'george.bluth@reqres.in',
-        first_name: 'George',
-        last_name: 'Bluth',
-        avatar: 'https://reqres.in/img/faces/1-image.jpg',
-      }];
+  describe("view user actions", () => {
+    it("should dispatch the view user action", () => {
+      const reqUserData = [
+        {
+          id: 1,
+          email: "george.bluth@reqres.in",
+          first_name: "George",
+          last_name: "Bluth",
+          avatar: "https://reqres.in/img/faces/1-image.jpg",
+        },
+      ];
 
       const expectedActions = [
         {
@@ -67,10 +72,10 @@ describe('user actions', () => {
             user: [
               {
                 id: 1,
-                email: 'george.bluth@reqres.in',
-                first_name: 'George',
-                last_name: 'Bluth',
-                avatar: 'https://reqres.in/img/faces/1-image.jpg',
+                email: "george.bluth@reqres.in",
+                first_name: "George",
+                last_name: "Bluth",
+                avatar: "https://reqres.in/img/faces/1-image.jpg",
               },
             ],
           },
@@ -81,25 +86,24 @@ describe('user actions', () => {
     });
   });
 
-  describe('update user actions', () => {
-    it('should dispatch the update user action', () => {
+  describe("update user actions", () => {
+    it("should dispatch the update user action", () => {
       const reqUserData = {
         id: 5,
-        email: 'charles.morris@reqres.in',
-        first_name: 'Charles',
-        last_name: 'Morris',
+        email: "charles.morris@reqres.in",
+        first_name: "Charles",
+        last_name: "Morris",
       };
       const expectedActions = [
         {
           type: Types.Update_Employee_Success,
           payload: {
-            user:
-              {
-                id: 5,
-                email: 'charles.morris@reqres.in',
-                first_name: 'Charles',
-                last_name: 'Morris',
-              },
+            user: {
+              id: 5,
+              email: "charles.morris@reqres.in",
+              first_name: "Charles",
+              last_name: "Morris",
+            },
           },
         },
       ];
@@ -108,8 +112,8 @@ describe('user actions', () => {
     });
   });
 
-  describe('login user failed action', () => {
-    it('should dispatch the login user failed action', () => {
+  describe("login user failed action", () => {
+    it("should dispatch the login user failed action", () => {
       const expectedActions = [
         {
           type: Types.Login_Failed,
@@ -120,8 +124,8 @@ describe('user actions', () => {
     });
   });
 
-  describe('add user failed action', () => {
-    it('should dispatch the add user failed action', () => {
+  describe("add user failed action", () => {
+    it("should dispatch the add user failed action", () => {
       const expectedActions = [
         {
           type: Types.Add_Employee_Failed,
@@ -132,8 +136,8 @@ describe('user actions', () => {
     });
   });
 
-  describe('view user failed actions', () => {
-    it('should dispatch the view user failed action', () => {
+  describe("view user failed actions", () => {
+    it("should dispatch the view user failed action", () => {
       const expectedActions = [
         {
           type: Types.Loading_Employee_Failed,
@@ -144,8 +148,8 @@ describe('user actions', () => {
     });
   });
 
-  describe('update failed user actions', () => {
-    it('should dispatch the update failed user action', () => {
+  describe("update failed user actions", () => {
+    it("should dispatch the update failed user action", () => {
       const expectedActions = [
         {
           type: Types.Update_Employee_Failed,

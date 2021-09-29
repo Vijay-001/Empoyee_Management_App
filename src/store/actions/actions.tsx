@@ -1,7 +1,6 @@
-import Types from '../types';
+import Types from "../types";
 
 const ActionCreators = {
-
   loginSuccess: (user: any) => ({
     type: Types.Login_Success,
     payload: { user },
@@ -37,7 +36,6 @@ const ActionCreators = {
   UpdateEmployeeFailed: () => ({
     type: Types.Update_Employee_Failed,
   }),
-
 };
 
 export default ActionCreators;

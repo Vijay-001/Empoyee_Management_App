@@ -1,14 +1,14 @@
-import reducer from '../store/reducers/reducer';
-import Types from '../store/types';
+import reducer from "../store/reducers/reducer";
+import Types from "../store/types";
 
-describe('user reducer', () => {
-  describe('login users reducer', () => {
-    it('view users reducer expected state', () => {
+describe("user reducer", () => {
+  describe("login users reducer", () => {
+    it("view users reducer expected state", () => {
       const reqUserData = {
         user: [
           {
-            email: 'eve.holt@reqres.in',
-            password: 'pistol',
+            email: "eve.holt@reqres.in",
+            password: "pistol",
           },
         ],
       };
@@ -23,14 +23,14 @@ describe('user reducer', () => {
     });
   });
 
-  describe('add users reducer', () => {
-    it('add users reducer expected state', () => {
+  describe("add users reducer", () => {
+    it("add users reducer expected state", () => {
       const reqUserData = {
         user: [
           {
-            firstName: 'test',
-            lastName: 'testdata',
-            email: 'test@gmail.com',
+            firstName: "test",
+            lastName: "testdata",
+            email: "test@gmail.com",
           },
         ],
       };
@@ -45,15 +45,15 @@ describe('user reducer', () => {
     });
   });
 
-  describe('update users reducer', () => {
-    it('update users reducer expected state', () => {
+  describe("update users reducer", () => {
+    it("update users reducer expected state", () => {
       const reqUserData = {
         user: [
           {
             id: 5,
-            email: 'charles.morris@reqres.in',
-            first_name: 'Charles',
-            last_name: 'Morris',
+            email: "charles.morris@reqres.in",
+            first_name: "Charles",
+            last_name: "Morris",
           },
         ],
       };
@@ -68,16 +68,16 @@ describe('user reducer', () => {
     });
   });
 
-  describe('view users reducer', () => {
-    it('view users reducer expected state', () => {
+  describe("view users reducer", () => {
+    it("view users reducer expected state", () => {
       const reqUserData = {
         user: [
           {
             id: 1,
-            email: 'george.bluth@reqres.in',
-            first_name: 'George',
-            last_name: 'Bluth',
-            avatar: 'https://reqres.in/img/faces/1-image.jpg',
+            email: "george.bluth@reqres.in",
+            first_name: "George",
+            last_name: "Bluth",
+            avatar: "https://reqres.in/img/faces/1-image.jpg",
           },
         ],
       };
@@ -92,49 +92,42 @@ describe('user reducer', () => {
     });
   });
 
-  describe('add users reducer', () => {
-    it('add users reducer failed state', () => {
-      const failedAction = {
-        type: Types.Add_Employee_Failed,
-      };
-      const updatedState = reducer(undefined, failedAction);
-      expect(updatedState).toEqual({});
-    });
+  it("add users reducer failed state", () => {
+    const failedAction = {
+      type: Types.Add_Employee_Failed,
+    };
+    const updatedState = reducer(undefined, failedAction);
+    expect(updatedState).toEqual({});
   });
 
-  describe('update users reducer', () => {
-    it('update users reducer failed state', () => {
-      const failedAction = {
-        type: Types.Update_Employee_Failed,
-      };
-      const updatedState = reducer(undefined, failedAction);
-      expect(updatedState).toEqual({});
-    });
+  it("update users reducer failed state", () => {
+    const failedAction = {
+      type: Types.Update_Employee_Failed,
+    };
+    const updatedState = reducer(undefined, failedAction);
+    expect(updatedState).toEqual({});
   });
-  describe('login users reducer', () => {
-    it('login users reducer failed state', () => {
-      const failedAction = {
-        type: Types.Login_Failed,
-      };
-      const updatedState = reducer(undefined, failedAction);
-      expect(updatedState).toEqual({});
-    });
+
+  it("login users reducer failed state", () => {
+    const failedAction = {
+      type: Types.Login_Failed,
+    };
+    const updatedState = reducer(undefined, failedAction);
+    expect(updatedState).toEqual({});
   });
-  describe('view users failed reducer ', () => {
-    it('view users reducer failed state', () => {
-      const failedAction = {
-        type: Types.Loading_Employee_Failed,
-      };
-      const updatedState = reducer(undefined, failedAction);
-      expect(updatedState).toEqual({});
-    });
+
+  it("view users reducer failed state", () => {
+    const failedAction = {
+      type: Types.Loading_Employee_Failed,
+    };
+    const updatedState = reducer(undefined, failedAction);
+    expect(updatedState).toEqual({});
   });
-  describe('INITIAL_STATE', () => {
-    test('is correct', () => {
-      const action = { type: 'dummy_action' };
-      const initialState: any = [];
-      const updatedState = reducer(undefined, action);
-      expect(updatedState.users).toEqual(initialState);
-    });
+
+  test("is correct", () => {
+    const action = { type: "dummy_action" };
+    const initialState: any = [];
+    const updatedState = reducer(undefined, action);
+    expect(updatedState.users).toEqual(initialState);
   });
 });
