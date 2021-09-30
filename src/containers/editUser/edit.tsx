@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import { Button, Modal } from "react-bootstrap";
+import { useDispatch } from "react-redux";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { TextField, Container } from "@material-ui/core";
 import "../../App.scss";
@@ -10,14 +10,13 @@ import addUserDetails from "../../common/userApi/addUser";
 
 const UserEditModal: React.FC<IProps> = (props) => {
   const { show, onClose, mode, userInfo } = props;
-  const [userInfoState, setUserInfoState] = useState(userInfo);
   const dispatch = useDispatch();
-
+  const [userInfoState, setUserInfoState] = useState(userInfo);
   const onSaveModal = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (mode === Mode.EDIT) {
       dispatch(updateUserDetails(userInfoState));
-    } else {
+    } else if (mode === Mode.NEW) {
       dispatch(addUserDetails(userInfoState));
     }
     onClose();
@@ -62,6 +61,7 @@ const UserEditModal: React.FC<IProps> = (props) => {
                 setUserDetails("first_name", event.target.value);
               }}
               value={userInfoState?.first_name}
+              inputProps={{ "data-testid": "firstname" }}
               fullWidth
             />
 
@@ -76,6 +76,7 @@ const UserEditModal: React.FC<IProps> = (props) => {
                 setUserDetails("last_name", event.target.value);
               }}
               value={userInfoState?.last_name}
+              inputProps={{ "data-testid": "lastname" }}
               fullWidth
             />
 
@@ -91,14 +92,19 @@ const UserEditModal: React.FC<IProps> = (props) => {
                 setUserDetails("email", event.target.value);
               }}
               value={userInfoState?.email}
+              inputProps={{ "data-testid": "email" }}
               fullWidth
             />
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={onClose}>
+            <Button
+              variant="secondary"
+              onClick={onClose}
+              data-testid="closeButton"
+            >
               Close
             </Button>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" data-testid="saveButton">
               Save Changes
             </Button>
           </Modal.Footer>

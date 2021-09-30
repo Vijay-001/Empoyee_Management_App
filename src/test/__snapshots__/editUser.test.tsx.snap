@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<AdminLogin/> should match the snapshot 1`] = `
+exports[`<editUser/> should match the snapshot 1`] = `
 <ContextProvider
   value={
     Object {

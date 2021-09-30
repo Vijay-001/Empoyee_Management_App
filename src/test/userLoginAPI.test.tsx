@@ -19,7 +19,7 @@ describe("login user api testing", () => {
     };
     describe("Unit test", () => {
       it("should dispatch api success action", async () => {
-        const store: MiddlewareAPI = {
+        const store = {
           dispatch: jest.fn(),
           getState: jest.fn(),
         };

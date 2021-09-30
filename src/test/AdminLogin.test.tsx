@@ -1,10 +1,7 @@
 import configureMockStore from "redux-mock-store";
 import { Provider } from "react-redux";
-import { mount, shallow } from "enzyme";
-import { TextField } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
 import { fireEvent, render } from "@testing-library/react";
-import { shallowToJson } from "enzyme-to-json";
+import renderer from "react-test-renderer";
 import AdminLogin from "../containers/userLogin/login";
 
 const mockStore = configureMockStore();
@@ -20,28 +17,15 @@ describe("<AdminLogin/>", () => {
     password: "",
   };
 
-  let wrapper = beforeEach(() => {
-    wrapper = shallow(
-      <Provider store={store}>
-        <AdminLogin userInfo={fieldprops} />
-      </Provider>
-    );
-  });
-
-  it("should match the snapshot", () => {
-    expect(shallowToJson(wrapper)).toMatchSnapshot();
-  });
-
   const LoginComponent = () => (
     <Provider store={store}>
       <AdminLogin userInfo={fieldprops} />
     </Provider>
   );
 
-  it("renders a <TextField/> and <Button />component", () => {
-    const Wrapper = mount(<LoginComponent />);
-    expect(Wrapper.find(TextField)).toHaveLength(2);
-    expect(Wrapper.find(Button)).toHaveLength(1);
+  it("renders correctly", () => {
+    const tree = renderer.create(<LoginComponent />).toJSON();
+    expect(tree).toMatchSnapshot();
   });
 
   it("renders default state values", () => {

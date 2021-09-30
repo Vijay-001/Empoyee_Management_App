@@ -17,7 +17,6 @@ import useAppSelector from "../../store/reducers/reducerHooks";
 import { Mode } from "../../common/userInterface/userInterface";
 import getUserList from "../../common/userApi/viewUser";
 import UserEditModal from "../editUser/edit";
-import Types from "../../store/types";
 
 const useStyles = makeStyles({
   table: {
@@ -39,10 +38,7 @@ export default function ViewEmployeeDetails() {
   };
 
   useEffect(() => {
-    dispatch({
-      type: Types.Loading_Employee_Success,
-      payload: getUserList(dispatch),
-    });
+    getUserList(dispatch);
   }, [dispatch]);
 
   const data = useAppSelector((state) => {
@@ -77,6 +73,7 @@ export default function ViewEmployeeDetails() {
       <Box>
         <Button
           type="button"
+          data-testid="addUserDetails"
           variant="contained"
           className="buttonPrimary"
           onClick={() => onNewModel()}

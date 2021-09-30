@@ -1,37 +1,124 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ViewEmployee/> should match the snapshot 1`] = `
-<ContextProvider
-  value={
-    Object {
-      "store": Object {
-        "clearActions": [Function],
-        "dispatch": [Function],
-        "getActions": [Function],
-        "getState": [Function],
-        "replaceReducer": [Function],
-        "subscribe": [Function],
-      },
-      "subscription": Subscription {
-        "handleChangeWrapper": [Function],
-        "listeners": Object {
-          "notify": [Function],
-        },
-        "onStateChange": [Function],
-        "parentSub": undefined,
-        "store": Object {
-          "clearActions": [Function],
-          "dispatch": [Function],
-          "getActions": [Function],
-          "getState": [Function],
-          "replaceReducer": [Function],
-          "subscribe": [Function],
-        },
-        "unsubscribe": null,
-      },
-    }
-  }
+exports[`<ViewEmployee/> renders correctly 1`] = `
+<div
+  className="MuiContainer-root MuiContainer-maxWidthLg"
 >
-  <ViewEmployeeDetails />
-</ContextProvider>
+  <p />
+  <p />
+  <p />
+  <p />
+  <p />
+  <div
+    className="MuiBox-root MuiBox-root-2"
+  >
+    <button
+      className="MuiButtonBase-root MuiButton-root MuiButton-contained buttonPrimary"
+      data-testid="addUserDetails"
+      disabled={false}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={0}
+      type="button"
+    >
+      <span
+        className="MuiButton-label"
+      >
+        Add Employee
+      </span>
+      <span
+        className="MuiTouchRipple-root"
+      />
+    </button>
+  </div>
+  <p />
+  <p />
+  <p />
+  <p />
+  <p />
+  <div
+    className="MuiPaper-root MuiTableContainer-root MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <table
+      aria-label="simple table"
+      className="MuiTable-root makeStyles-table-1"
+      role={null}
+    >
+      <thead
+        className="MuiTableHead-root"
+        role={null}
+      >
+        <tr
+          className="MuiTableRow-root MuiTableRow-head"
+          role={null}
+        >
+          <th
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-head"
+            scope="col"
+          >
+             ID
+          </th>
+          <th
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-head"
+            scope="col"
+          >
+             firstName
+          </th>
+          <th
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-head"
+            scope="col"
+          >
+             LastName
+          </th>
+          <th
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-head"
+            scope="col"
+          >
+             Email
+          </th>
+          <th
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-head"
+            scope="col"
+          >
+             Action
+          </th>
+        </tr>
+      </thead>
+      <tbody
+        className="MuiTableBody-root"
+        role={null}
+      >
+        <tr
+          className="MuiTableRow-root"
+          role={null}
+        >
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body"
+          >
+            User data not found
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <main
+    className="MuiContainer-root MuiContainer-maxWidthXs"
+  />
+</div>
 `;
