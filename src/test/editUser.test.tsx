@@ -39,4 +39,17 @@ describe("<editUser/>", () => {
     fireEvent.click(saveButton);
     expect(saveButton).not.toHaveClass("Mui-disabled");
   });
+
+  it("test onchange fucntion with correct state data", async () => {
+    const { getByTestId } = render(<EditComponent />);
+    const firstname = getByTestId("firstname") as HTMLInputElement;
+    const email = getByTestId("email") as HTMLInputElement;
+    const lastname = getByTestId("lastname") as HTMLInputElement;
+    const saveButton = await getByTestId("saveButton");
+    fireEvent.change(firstname, { target: { value: "abc" } });
+    fireEvent.change(email, { target: { value: "vk@gmail.com" } });
+    fireEvent.change(lastname, { target: { value: "abc" } });
+    fireEvent.click(saveButton);
+    expect(saveButton).not.toHaveClass("Mui-disabled");
+  });
 });

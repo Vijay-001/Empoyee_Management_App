@@ -2,12 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\common\\formikValidations",
     "\\src\\component\\header",
-    "\\src\\containers",
-    "\\src\\containers\\editUser",
+    "\\src\\containers\\userLogin",
+    "\\src\\store\\actions",
     "\\src\\test"
   ],
-  "SelectedNode": "\\src\\containers\\editUser\\edit.tsx",
+  "SelectedNode": "\\src\\test\\userEditAPI.test.tsx",
   "PreviewInSolutionExplorer": false
 }

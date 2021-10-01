@@ -44,8 +44,8 @@ describe("<AdminLogin/>", () => {
     const email = getByTestId("userAccountEmail");
     const password = getByTestId("userAccountPassword");
     const button = getByTestId("submitUserDetails");
-    fireEvent.change(email, { target: { value: "vk@gmail.com" } });
-    fireEvent.change(password, { target: { value: "data100" } });
+    fireEvent.keyUp(email, { target: { value: "vkooogmail" } });
+    fireEvent.keyUp(password, { target: { value: "data100" } });
     expect(button).not.toHaveClass("Mui-disabled");
   });
 });

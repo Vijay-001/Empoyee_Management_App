@@ -41,12 +41,12 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
 
   const userLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    handleSubmit();
     if (
       typeof userInfoState !== "undefined" &&
       "email" in userInfoState &&
       "password" in userInfoState
     ) {
+      handleSubmit();
       await dispatch(adminLogin(userInfoState));
     }
   };

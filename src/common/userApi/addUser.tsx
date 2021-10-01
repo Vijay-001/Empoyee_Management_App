@@ -20,13 +20,15 @@ const addUserDetails =
           dispatch(ActionCreators.AddEmployeeFailed());
         } else {
           const existingdata = getState()?.users?.users;
-          const newselection = [...existingdata, res.data];
+          const newselection =
+            typeof existingdata !== "undefined"
+              ? [...existingdata, res.data]
+              : res.data;
           dispatch(ActionCreators.AddEmployeeSuccess(newselection));
         }
       })
-      .catch((error) => {
+      .catch(() => {
         dispatch(ActionCreators.AddEmployeeFailed());
-        return error;
       });
   };
 

@@ -19,9 +19,8 @@ const adminLogin =
           dispatch(ActionCreators.loginSuccess(newselection));
         }
       })
-      .catch((error) => {
+      .catch(() => {
         dispatch(ActionCreators.loginFailed());
-        return error;
       });
   };
 

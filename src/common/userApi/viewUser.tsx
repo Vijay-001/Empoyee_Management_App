@@ -3,7 +3,7 @@ import { Dispatch } from "react";
 import ActionCreators from "../../store/actions/actions";
 
 const getUserList = async (dispatch: Dispatch<any>): Promise<void> => {
-  await axios({ url: "https://reqres.in/api/users", method: "get", data: {} })
+  await axios({ url: "https://reqres.in/api/users", method: "get" })
     .then((res) => {
       if (!res.data) {
         dispatch(ActionCreators.loadingEmployeeFailed());
