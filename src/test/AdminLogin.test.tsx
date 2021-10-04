@@ -1,7 +1,6 @@
 import configureMockStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import { fireEvent, render } from "@testing-library/react";
-import renderer from "react-test-renderer";
 import AdminLogin from "../containers/userLogin/login";
 
 const mockStore = configureMockStore();
@@ -22,11 +21,6 @@ describe("<AdminLogin/>", () => {
       <AdminLogin userInfo={fieldprops} />
     </Provider>
   );
-
-  it("renders correctly", () => {
-    const tree = renderer.create(<LoginComponent />).toJSON();
-    expect(tree).toMatchSnapshot();
-  });
 
   it("renders default state values", () => {
     const { getByTestId } = render(<LoginComponent />);

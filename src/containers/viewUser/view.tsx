@@ -99,8 +99,8 @@ export default function ViewEmployeeDetails() {
           </TableHead>
           {typeof data !== "undefined" && Array.isArray(data) && data.length ? (
             <TableBody>
-              {data.map((row: any) => (
-                <TableRow key={row.id}>
+              {data.map((row: any, index) => (
+                <TableRow key={index}>
                   <TableCell component="th" scope="row">
                     {row.id}
                   </TableCell>

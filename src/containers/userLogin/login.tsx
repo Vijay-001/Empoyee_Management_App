@@ -4,7 +4,6 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { FormikProps } from "formik";
 import { TextField } from "@material-ui/core";
 import {
@@ -14,6 +13,7 @@ import {
 import adminLogin from "../../common/userApi/userlogin";
 import { loginValidation } from "../../common/formikValidations/userValidation";
 import useAppSelector from "../../store/reducers/reducerHooks";
+import { Redirect } from "react-router-dom";
 
 const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
   const {
@@ -30,7 +30,6 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
   const [userInfoState, setUserInfoState] = useState(userInfo);
 
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const setUserDetails = (fieldName: string, value: string) => {
     setUserInfoState({
@@ -41,12 +40,12 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
 
   const userLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    handleSubmit();
     if (
       typeof userInfoState !== "undefined" &&
       "email" in userInfoState &&
       "password" in userInfoState
     ) {
-      handleSubmit();
       await dispatch(adminLogin(userInfoState));
     }
   };
@@ -60,7 +59,7 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
 
   if (data !== "undefined") {
     if (Array.isArray(data) && data.length) {
-      history.push("/ViewEmployee");
+      return <Redirect push to="/ViewEmployee" />;
     }
   }
 

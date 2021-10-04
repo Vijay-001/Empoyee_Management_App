@@ -60,7 +60,7 @@ const UserEditModal: React.FC<IProps> = (props) => {
               onChange={(event: any) => {
                 setUserDetails("first_name", event.target.value);
               }}
-              value={userInfoState?.first_name}
+              value={userInfoState?.first_name || ""}
               inputProps={{ "data-testid": "firstname" }}
               fullWidth
             />
@@ -75,7 +75,7 @@ const UserEditModal: React.FC<IProps> = (props) => {
               onChange={(event: any) => {
                 setUserDetails("last_name", event.target.value);
               }}
-              value={userInfoState?.last_name}
+              value={userInfoState?.last_name || ""}
               inputProps={{ "data-testid": "lastname" }}
               fullWidth
             />
@@ -91,7 +91,7 @@ const UserEditModal: React.FC<IProps> = (props) => {
               onChange={(event: any) => {
                 setUserDetails("email", event.target.value);
               }}
-              value={userInfoState?.email}
+              value={userInfoState?.email || ""}
               inputProps={{ "data-testid": "email" }}
               fullWidth
             />
