@@ -14,6 +14,7 @@ import adminLogin from "../../common/userApi/userlogin";
 import { loginValidation } from "../../common/formikValidations/userValidation";
 import useAppSelector from "../../store/reducers/reducerHooks";
 import { Redirect } from "react-router-dom";
+import { useEffect } from "react";
 
 const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
   const {
@@ -40,6 +41,10 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
     });
   };
 
+  useEffect(() => {
+    setLoginFlag("true");
+  }, []);
+
   const userLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     handleSubmit();
@@ -49,7 +54,6 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
       "password" in userInfoState
     ) {
       await dispatch(adminLogin(userInfoState));
-      setLoginFlag("true");
     }
   };
 
@@ -116,7 +120,7 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
         <p />
         <p />
         <p />
-        {loginflag === "true" ? (
+        {loginflag === "true" && !Array.isArray(data) && !data ? (
           <label style={{ color: "red" }}>{"invalid login details"}</label>
         ) : (
           ""
