@@ -41,12 +41,7 @@ export default function ViewEmployeeDetails() {
     getUserList(dispatch);
   }, [dispatch]);
 
-  const data = useAppSelector((state) => {
-    if (state && state !== undefined && state.users) {
-      return state.users.users;
-    }
-    return null;
-  });
+  const data = useAppSelector((state) => state?.users?.users);
 
   const Updatemodel = (updata: any) => {
     setMode(Mode.EDIT);

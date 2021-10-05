@@ -29,6 +29,8 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
 
   const [userInfoState, setUserInfoState] = useState(userInfo);
 
+  const [loginflag, setLoginFlag] = useState("false");
+
   const dispatch = useDispatch();
 
   const setUserDetails = (fieldName: string, value: string) => {
@@ -47,15 +49,11 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
       "password" in userInfoState
     ) {
       await dispatch(adminLogin(userInfoState));
+      setLoginFlag("true");
     }
   };
 
-  const data = useAppSelector((state) => {
-    if (state && state !== undefined && state.users) {
-      return state.users.users;
-    }
-    return null;
-  });
+  const data = useAppSelector((state) => state?.users?.users);
 
   if (data !== "undefined") {
     if (Array.isArray(data) && data.length) {
@@ -118,6 +116,11 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
         <p />
         <p />
         <p />
+        {loginflag === "true" ? (
+          <label style={{ color: "red" }}>{"invalid login details"}</label>
+        ) : (
+          ""
+        )}
         <p />
         <Button
           type="submit"

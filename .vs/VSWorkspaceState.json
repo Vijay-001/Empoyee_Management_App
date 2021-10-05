@@ -2,11 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\containers\\editUser",
-    "\\src\\containers\\userLogin",
-    "\\src\\containers\\viewUser",
-    "\\src\\test"
+    "\\src\\component",
+    "\\src\\component\\header",
+    "\\src\\containers"
   ],
-  "SelectedNode": "\\src\\test\\editUser.test.tsx",
+  "SelectedNode": "\\src\\component\\header\\appBar.tsx",
   "PreviewInSolutionExplorer": false
 }

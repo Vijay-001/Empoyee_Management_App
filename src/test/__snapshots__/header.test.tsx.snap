@@ -48,29 +48,7 @@ exports[`<Appbar/> renders correctly 1`] = `
       >
         Employee Management App
       </h6>
-      <a
-        aria-disabled={false}
-        className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-colorInherit"
-        href="/adminlogin"
-        onBlur={[Function]}
-        onDragLeave={[Function]}
-        onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseDown={[Function]}
-        onMouseLeave={[Function]}
-        onMouseUp={[Function]}
-        onTouchEnd={[Function]}
-        onTouchMove={[Function]}
-        onTouchStart={[Function]}
-        tabIndex={0}
-      >
-        <span
-          className="MuiButton-label"
-        >
-          Logout
-        </span>
-      </a>
+      
     </div>
   </header>
 </div>

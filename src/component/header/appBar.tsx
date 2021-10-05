@@ -5,6 +5,8 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+import { IStateReduced } from "../../store";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Header = () => {
+const Header = (userState: any) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -35,13 +37,21 @@ const Header = () => {
           <Typography variant="h6" className={classes.title}>
             Employee Management App
           </Typography>
-          <Button color="inherit" href="/adminlogin">
-            Logout
-          </Button>
+          {Array.isArray(userState.userState) && userState.userState.length ? (
+            <Button color="inherit" href="/adminlogin">
+              Logout
+            </Button>
+          ) : (
+            ""
+          )}
         </Toolbar>
       </AppBar>
     </div>
   );
 };
 
-export default Header;
+const mapStateToProps = (state: IStateReduced) => ({
+  userState: state?.users?.users,
+});
+
+export default connect(mapStateToProps)(Header);
