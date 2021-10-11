@@ -1,23 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { createLogger } from "redux-logger";
 import rootReducer from "./reducers";
+import Thunk from "redux-thunk";
 
 const middleware: any = [];
-
 if (process.env.NODE_ENV === "development") {
-  const logger = createLogger({
-    level: "info",
-    collapsed: true,
-  });
-  middleware.push(logger);
+  middleware.push(Thunk);
 }
 
 export const store = configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-    }).concat(...middleware),
+  middleware,
 });
 
 export type IStateReduced = ReturnType<typeof store.getState>;

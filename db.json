@@ -6,34 +6,9 @@
       "password": "abc100"
     },
     {
-      "email": "vijaykulkarni43@gmail.com",
-      "password": "abc00",
+      "email": "test@gmail.com",
+      "password": "kdkdk",
       "id": 2
-    },
-    {
-      "email": "test@kkkk.com",
-      "password": "lml",
-      "id": 3
-    },
-    {
-      "email": "test@kkkk.com",
-      "password": "lml",
-      "id": 4
-    },
-    {
-      "email": "eve.holt@reqres.in",
-      "password": "hlhl",
-      "id": 5
-    },
-    {
-      "email": "eve.holt@reqres.in",
-      "password": "l",
-      "id": 6
-    },
-    {
-      "email": "vijaykulkarni@gmail.com",
-      "password": "j",
-      "id": 7
     }
   ],
   "employees": [
