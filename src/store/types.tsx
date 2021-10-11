@@ -1,4 +1,7 @@
 const Types = {
+  SignUP_Success: "SignUP_Success",
+  SignUP_Failed: "SignUP_Failed",
+
   Login_Success: "Login_Success",
   Login_Failed: "Login_Failed",
 

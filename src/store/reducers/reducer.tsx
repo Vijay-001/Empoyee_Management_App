@@ -6,6 +6,17 @@ const initialState = {
 
 const reducer = (state = initialState, action: any) => {
   switch (action.type) {
+    case Types.SignUP_Success:
+      return {
+        ...state,
+        users: action.payload.user,
+      };
+    case Types.SignUP_Failed:
+      return {
+        ...state,
+        users: action.payload,
+      };
+
     case Types.Login_Success:
       return {
         ...state,

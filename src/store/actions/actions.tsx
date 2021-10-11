@@ -1,6 +1,15 @@
 import Types from "../types";
 
 const ActionCreators = {
+  signUpSuccess: (user: any) => ({
+    type: Types.SignUP_Success,
+    payload: { user },
+  }),
+
+  signUpFailed: () => ({
+    type: Types.SignUP_Failed,
+  }),
+
   loginSuccess: (user: any) => ({
     type: Types.Login_Success,
     payload: { user },

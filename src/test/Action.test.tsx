@@ -29,6 +29,25 @@ describe("user actions", () => {
     });
   });
 
+  describe("sign-up user action", () => {
+    it("should dispatch the sign-up user action", () => {
+      const reqUserData = { email: "eve.holt@reqres.in", password: "pistol" };
+      const expectedActions = [
+        {
+          type: Types.SignUP_Success,
+          payload: {
+            user: {
+              email: "eve.holt@reqres.in",
+              password: "pistol",
+            },
+          },
+        },
+      ];
+      store.dispatch(ActionCreators.signUpSuccess(reqUserData));
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
   describe("add user action", () => {
     it("should dispatch the add user action", () => {
       const reqUserData = {
@@ -120,6 +139,18 @@ describe("user actions", () => {
         },
       ];
       store.dispatch(ActionCreators.loginFailed());
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  describe("sign-up user failed action", () => {
+    it("should dispatch the sign-up user failed action", () => {
+      const expectedActions = [
+        {
+          type: Types.SignUP_Failed,
+        },
+      ];
+      store.dispatch(ActionCreators.signUpFailed());
       expect(store.getActions()).toEqual(expectedActions);
     });
   });

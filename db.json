@@ -1,0 +1,68 @@
+{
+  "login": [
+    {
+      "id": 1,
+      "email": "vijay@gmail.com",
+      "password": "abc100"
+    },
+    {
+      "email": "vijaykulkarni43@gmail.com",
+      "password": "abc00",
+      "id": 2
+    },
+    {
+      "email": "test@kkkk.com",
+      "password": "lml",
+      "id": 3
+    },
+    {
+      "email": "test@kkkk.com",
+      "password": "lml",
+      "id": 4
+    },
+    {
+      "email": "eve.holt@reqres.in",
+      "password": "hlhl",
+      "id": 5
+    },
+    {
+      "email": "eve.holt@reqres.in",
+      "password": "l",
+      "id": 6
+    },
+    {
+      "email": "vijaykulkarni@gmail.com",
+      "password": "j",
+      "id": 7
+    }
+  ],
+  "employees": [
+    {
+      "id": 1,
+      "first_name": "vijayllllmmmmm",
+      "last_name": "kkkkklllllllldddd",
+      "email": "vijay@gmail.com",
+      "password": "abc10",
+      "address": "Pune",
+      "description": "Pune"
+    },
+    {
+      "id": 2,
+      "first_name": "pankaj",
+      "last_name": "dhumalsslloooffkkkk",
+      "email": "pankaj@mail.comj",
+      "password": "abc10",
+      "address": "Pune",
+      "description": "Pune"
+    },
+    {
+      "first_name": "Aashishvvvvvvvvvv",
+      "last_name": "Dahalll",
+      "email": "aashdahal@gmail.com",
+      "password": "abc10",
+      "address": "Thimi, Bhaktapur",
+      "description": "No description",
+      "id": 3
+    }
+  ]
+}

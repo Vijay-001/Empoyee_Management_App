@@ -22,6 +22,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = (userState: any) => {
   const classes = useStyles();
+  const chckk = JSON.parse(sessionStorage.getItem("userName") || "{}");
+  console.log("ddd", chckk);
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -37,8 +39,19 @@ const Header = (userState: any) => {
           <Typography variant="h6" className={classes.title}>
             Employee Management App
           </Typography>
+
           {Array.isArray(userState.userState) && userState.userState.length ? (
-            <Button color="inherit" href="/adminlogin">
+            <Typography variant="h6">{`Hello ${JSON.parse(
+              sessionStorage.getItem("userName") || "{}"
+            )}`}</Typography>
+          ) : (
+            ""
+          )}
+          {Array.isArray(userState.userState) && userState.userState.length ? (
+            <Button
+              href="/adminlogin"
+              onClick={() => sessionStorage.removeItem("userName")}
+            >
               Logout
             </Button>
           ) : (

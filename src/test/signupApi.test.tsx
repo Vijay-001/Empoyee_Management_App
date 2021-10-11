@@ -1,32 +1,30 @@
 import axios from "axios";
-import adminLogin from "../common/userApi/userlogin";
+import userSignup from "../common/userApi/userSignup";
 import Types from "../store/types";
 
 jest.mock("axios", () => jest.fn());
 
-describe("login user api testing", () => {
+describe("Signup user api testing", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
-  describe("#userLoginAPI", () => {
+  describe("#userSignupAPI", () => {
     const mockApiResponse = {
-      type: "Login_Success",
+      type: Types.SignUP_Success,
       payload: {
-        user: [
-          {
-            email: "vijay@gmail.com ",
-            password: "abc@100",
-          },
-        ],
+        user: {
+          email: "apitest@gmail.com ",
+          password: "abc@100",
+        },
       },
     };
 
-    describe("Unit test", () => {
+    describe("Signup Unit test", () => {
       const userPayload = {
         first_name: "",
         id: "",
         last_name: "",
-        email: "vijay@gmail.com ",
+        email: "apitest@gmail.com ",
         avatar: "",
         password: "abc@100",
       };
@@ -36,19 +34,21 @@ describe("login user api testing", () => {
           getState: jest.fn(),
         };
         const mResponse = {
-          data: [
-            {
-              email: "vijay@gmail.com ",
-              password: "abc@100",
-            },
-          ],
+          data: {
+            email: "apitest@gmail.com ",
+            password: "abc@100",
+          },
         };
         (axios as jest.Mocked<any>).mockResolvedValueOnce(mResponse);
-        await adminLogin(userPayload)(store.dispatch);
+        await userSignup(userPayload)(store.dispatch);
 
         expect(axios).toBeCalledWith({
-          url: "http://localhost:5000/login?q=" + userPayload.email,
-          method: "get",
+          url: "http://localhost:5000/login",
+          method: "post",
+          data: {
+            email: userPayload.email,
+            password: userPayload.password,
+          },
         });
         expect(store.dispatch).toBeCalledWith(mockApiResponse);
         expect(axios).toHaveBeenCalledTimes(1);
@@ -56,8 +56,8 @@ describe("login user api testing", () => {
     });
   });
 
-  describe("#Login_Failed with wrong or empty payload", () => {
-    const mockApiResponse = { type: Types.Login_Failed };
+  describe("#Signup with wrong or empty payload", () => {
+    const mockApiResponse = { type: Types.SignUP_Failed };
 
     describe("Login_Failed", () => {
       const userPayload = {
@@ -68,18 +68,22 @@ describe("login user api testing", () => {
         avatar: "",
         password: "pistol",
       };
-      it("#Login_Failed with wrong or empty payload", async () => {
+      it("#Signup with wrong or empty payload", async () => {
         const store = {
           dispatch: jest.fn(),
           getState: jest.fn(),
         };
         const mResponse = {};
         (axios as jest.Mocked<any>).mockResolvedValueOnce(mResponse);
-        await adminLogin(userPayload)(store.dispatch);
+        await userSignup(userPayload)(store.dispatch);
 
         expect(axios).toBeCalledWith({
-          url: "http://localhost:5000/login?q=" + userPayload.email,
-          method: "get",
+          url: "http://localhost:5000/login",
+          method: "post",
+          data: {
+            email: userPayload.email,
+            password: userPayload.password,
+          },
         });
         expect(store.dispatch).toBeCalledWith(mockApiResponse);
         expect(axios).toHaveBeenCalledTimes(1);
@@ -87,10 +91,10 @@ describe("login user api testing", () => {
     });
   });
 
-  describe("#Login failed due network error or url", () => {
-    const mockApiResponse = { type: "Login_Failed" };
+  describe("#Signup failed due network error or url", () => {
+    const mockApiResponse = { type: Types.SignUP_Failed };
 
-    describe("#Login failed due network error or url", () => {
+    describe("#Signup failed due network error or url", () => {
       const userPayload = {
         first_name: "",
         id: "",
@@ -111,11 +115,15 @@ describe("login user api testing", () => {
           },
         };
         (axios as jest.Mocked<any>).mockResolvedValueOnce(mResponse);
-        await adminLogin(userPayload)(store.dispatch);
+        await userSignup(userPayload)(store.dispatch);
 
         expect(axios).toBeCalledWith({
-          url: "http://localhost:5000/login?q=" + userPayload.email,
-          method: "get",
+          url: "http://localhost:5000/login",
+          method: "post",
+          data: {
+            email: userPayload.email,
+            password: userPayload.password,
+          },
         });
         expect(store.dispatch).toBeCalledWith(mockApiResponse);
         expect(axios).toHaveBeenCalledTimes(1);

@@ -55,7 +55,9 @@
     "format": "prettier --write src/**/*.ts{,x}",
     "lint": "tsc --noEmit && eslint src/**/*.ts{,x}",
     "start": "react-scripts start",
-    "test": "jest --detectOpenHandles --watchAll --coverage"
+    "json-server": "json-server --watch db.json --port 5000",
+    "test": "jest --detectOpenHandles --watchAll --coverage",
+    "dev": "concurrently \"npm start\" \"npm run json-server\""
   },
   "eslintConfig": {
     "extends": [
@@ -91,6 +93,7 @@
     "@typescript-eslint/parser": "^4.31.0",
     "babel-jest": "^26.6.0",
     "babel-preset-stage-0": "^6.24.1",
+    "concurrently": "^6.3.0",
     "eslint": "^7.20.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-react-app": "^6.0.0",

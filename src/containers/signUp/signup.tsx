@@ -10,14 +10,12 @@ import {
   FormValues,
   OtherProps,
 } from "../../common/userInterface/userInterface";
-import adminLogin from "../../common/userApi/userlogin";
 import { loginValidation } from "../../common/formikValidations/userValidation";
 import useAppSelector from "../../store/reducers/reducerHooks";
-import { Redirect } from "react-router-dom";
-import { useEffect } from "react";
+import userSignup from "../../common/userApi/userSignup";
 import Link from "@material-ui/core/Link";
 
-const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
+const UserSignUp = (props: OtherProps & FormikProps<FormValues>) => {
   const {
     values,
     errors,
@@ -31,8 +29,6 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
 
   const [userInfoState, setUserInfoState] = useState(userInfo);
 
-  const [loginflag, setLoginFlag] = useState("false");
-
   const dispatch = useDispatch();
 
   const setUserDetails = (fieldName: string, value: string) => {
@@ -42,10 +38,6 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
     });
   };
 
-  useEffect(() => {
-    setLoginFlag("true");
-  }, []);
-
   const userLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     handleSubmit();
@@ -54,20 +46,11 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
       "email" in userInfoState &&
       "password" in userInfoState
     ) {
-      await dispatch(adminLogin(userInfoState));
+      await dispatch(userSignup(userInfoState));
     }
   };
 
   const data = useAppSelector((state) => state?.users?.users);
-  if (data !== "undefined") {
-    if (Array.isArray(data) && data.length) {
-      sessionStorage.setItem(
-        "userName",
-        JSON.stringify(data[0].email.match(/^([^@]*)@/)[1])
-      );
-      return <Redirect push to="/ViewEmployee" />;
-    }
-  }
 
   return (
     <form onSubmit={userLogin}>
@@ -124,8 +107,10 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
         <p />
         <p />
         <p />
-        {loginflag === "true" && !Array.isArray(data) && !data ? (
-          <label style={{ color: "red" }}>{"invalid login details"}</label>
+        {!Array.isArray(data) && data ? (
+          <label style={{ color: "green" }}>
+            {"Login details registered successfully."}
+          </label>
         ) : (
           ""
         )}
@@ -143,7 +128,7 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
           }
         >
           {" "}
-          Sign In
+          SignUp
         </Button>
         <p></p>
         <p></p>
@@ -151,8 +136,8 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
           <p></p>
           <p></p>
           <Grid item>
-            <Link href="/signup" variant="body2">
-              {"Don't have an account? Sign Up"}
+            <Link href="/adminlogin" variant="body2">
+              {"Already have an account? Sign in"}
             </Link>
           </Grid>
         </Grid>
@@ -161,4 +146,4 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
   );
 };
 
-export default loginValidation(AdminLoginForm);
+export default loginValidation(UserSignUp);

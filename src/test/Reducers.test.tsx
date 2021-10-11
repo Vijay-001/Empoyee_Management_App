@@ -3,7 +3,7 @@ import Types from "../store/types";
 
 describe("user reducer", () => {
   describe("login users reducer", () => {
-    it("view users reducer expected state", () => {
+    it("login users reducer expected state", () => {
       const reqUserData = {
         user: [
           {
@@ -15,6 +15,27 @@ describe("user reducer", () => {
       const action = {
         payload: reqUserData,
         type: Types.Login_Success,
+      };
+
+      const updatedState = reducer(undefined, action);
+      expect(updatedState.users).toHaveLength(1);
+      expect(updatedState.users).toEqual(reqUserData.user);
+    });
+  });
+
+  describe("signup users reducer", () => {
+    it("signup users reducer expected state", () => {
+      const reqUserData = {
+        user: [
+          {
+            email: "eve.holt@reqres.in",
+            password: "pistol",
+          },
+        ],
+      };
+      const action = {
+        payload: reqUserData,
+        type: Types.SignUP_Success,
       };
 
       const updatedState = reducer(undefined, action);
@@ -111,6 +132,14 @@ describe("user reducer", () => {
   it("login users reducer failed state", () => {
     const failedAction = {
       type: Types.Login_Failed,
+    };
+    const updatedState = reducer(undefined, failedAction);
+    expect(updatedState).toEqual({});
+  });
+
+  it("signup users reducer failed state", () => {
+    const failedAction = {
+      type: Types.SignUP_Failed,
     };
     const updatedState = reducer(undefined, failedAction);
     expect(updatedState).toEqual({});
