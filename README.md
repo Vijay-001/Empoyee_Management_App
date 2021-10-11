@@ -10,16 +10,10 @@ Used Technologies    :  react-redux-typescript, sass and jest.
 
 API                  :  dummy services integrated for fetching, updating and insertion.
 
-API Source           :  https://reqres.in/
+API Source           :  JSON-Server API
 
-Validation           :  Added formik and Yup validation.
+Validation           :  Added formik with Yup validation.
 
-Login Credential     :   email    : eve.holt@reqres.in
-                                        password : cityslicka
+Run Project           : npm start or npm run dev 
 
-sign-up Credential   :   email    : eve.holt@reqres.in,
-                                    password : pistol
-
-Run Project            : npm start  
-
-Run Tests cases        :  npm test  
+Run Tests cases      :  npm test  
