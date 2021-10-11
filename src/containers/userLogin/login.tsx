@@ -16,6 +16,7 @@ import useAppSelector from "../../store/reducers/reducerHooks";
 import { Redirect } from "react-router-dom";
 import { useEffect } from "react";
 import Link from "@material-ui/core/Link";
+import { ToastContainer, toast } from "react-toastify";
 
 const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
   const {
@@ -46,6 +47,7 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
     setLoginFlag("true");
   }, []);
 
+  const notify = () => toast.error("Login credential does not exist");
   const userLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     handleSubmit();
@@ -55,6 +57,7 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
       "password" in userInfoState
     ) {
       await dispatch(adminLogin(userInfoState));
+      notify();
     }
   };
 
@@ -125,7 +128,7 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
         <p />
         <p />
         {loginflag === "true" && !Array.isArray(data) && !data ? (
-          <label style={{ color: "red" }}>{"invalid login details"}</label>
+          <ToastContainer />
         ) : (
           ""
         )}

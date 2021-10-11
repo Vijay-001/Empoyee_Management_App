@@ -14,6 +14,7 @@ import { loginValidation } from "../../common/formikValidations/userValidation";
 import useAppSelector from "../../store/reducers/reducerHooks";
 import userSignup from "../../common/userApi/userSignup";
 import Link from "@material-ui/core/Link";
+import { ToastContainer, toast } from "react-toastify";
 
 const UserSignUp = (props: OtherProps & FormikProps<FormValues>) => {
   const {
@@ -38,6 +39,8 @@ const UserSignUp = (props: OtherProps & FormikProps<FormValues>) => {
     });
   };
 
+  const notify = () => toast.success("User details registered successfully!");
+
   const userLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     handleSubmit();
@@ -47,6 +50,7 @@ const UserSignUp = (props: OtherProps & FormikProps<FormValues>) => {
       "password" in userInfoState
     ) {
       await dispatch(userSignup(userInfoState));
+      notify();
     }
   };
 
@@ -107,13 +111,7 @@ const UserSignUp = (props: OtherProps & FormikProps<FormValues>) => {
         <p />
         <p />
         <p />
-        {!Array.isArray(data) && data ? (
-          <label style={{ color: "green" }}>
-            {"Login details registered successfully."}
-          </label>
-        ) : (
-          ""
-        )}
+        {!Array.isArray(data) && data ? <ToastContainer /> : ""}
         <p />
         <Button
           type="submit"

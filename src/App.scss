@@ -3,7 +3,7 @@
 // import external css syntax.
 
 @import  'bootstrap/dist/css/bootstrap.min.css';
-
+@import "react-toastify/dist/ReactToastify.css";
 
 // Sass varrible declaration.
 
@@ -15,9 +15,6 @@ $text-transform: capitalize;
 $text-align: center;
 $font-weight: bold;
 $class-hover-color:none;
-
-
-
 
 
 .App {
