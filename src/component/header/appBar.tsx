@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    align: "center",
   },
 }));
 
@@ -39,7 +40,10 @@ const Header = () => {
           </Typography>
 
           {sessionStorage.getItem("userName") ? (
-            <Typography variant="h6">{`Hello ${JSON.parse(
+            <Typography
+              variant="h6"
+              className={classes.title}
+            >{`Hi ${JSON.parse(
               sessionStorage.getItem("userName") || "{}"
             )}`}</Typography>
           ) : (

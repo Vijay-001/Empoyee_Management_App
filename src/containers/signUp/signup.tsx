@@ -15,6 +15,8 @@ import useAppSelector from "../../store/reducers/reducerHooks";
 import userSignup from "../../common/userApi/userSignup";
 import Link from "@material-ui/core/Link";
 import { ToastContainer, toast } from "react-toastify";
+import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
 
 const UserSignUp = (props: OtherProps & FormikProps<FormValues>) => {
   const {
@@ -62,6 +64,18 @@ const UserSignUp = (props: OtherProps & FormikProps<FormValues>) => {
         <CssBaseline />
         <p />
         <p />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Typography component="h1" variant="h5">
+            Sign up
+          </Typography>
+        </Box>
         <p />
         <p />
         <Grid container spacing={2}>

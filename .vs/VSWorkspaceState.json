@@ -1,9 +1,11 @@
 {
   "ExpandedNodes": [
     "",
+    "\\src",
     "\\src\\component\\header",
+    "\\src\\containers",
     "\\src\\containers\\userLogin"
   ],
-  "SelectedNode": "\\src",
+  "SelectedNode": "\\src\\containers\\userLogin\\login.tsx",
   "PreviewInSolutionExplorer": false
 }

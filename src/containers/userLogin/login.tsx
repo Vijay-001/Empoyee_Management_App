@@ -17,6 +17,8 @@ import { Redirect } from "react-router-dom";
 import { useEffect } from "react";
 import Link from "@material-ui/core/Link";
 import { ToastContainer, toast } from "react-toastify";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
 
 const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
   const {
@@ -78,6 +80,18 @@ const AdminLoginForm = (props: OtherProps & FormikProps<FormValues>) => {
         <CssBaseline />
         <p />
         <p />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+        </Box>
         <p />
         <p />
         <Grid container spacing={2}>
